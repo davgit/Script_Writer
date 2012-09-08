@@ -1,0 +1,16 @@
+new(){
+	FileSelectFile,filename,S16,,Create a new file,AHK Files (*.ahk)
+	if ErrorLevel
+	return
+	file:=InStr(filename,".ahk")?filename:filename ".ahk"
+	if fileexist(file)
+	loop,%file%
+	file:=a_loopfilefullpath
+	if ssn(xget("files"),"//*[@file='" file "']")
+	return select(file)
+	ifexist,%file%
+	return xadd("settings","lastopen/file","",file,1),autoopen(file),select(file)
+	stuff:="#SingleInstance, Force`n" ;add user editable new file contents
+	FileAppend,%stuff%,%file%
+	xadd("settings","lastopen/file","",file,1),autoopen(file),select(file)
+}

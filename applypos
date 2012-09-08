@@ -1,0 +1,44 @@
+applypos(winnum="",positiondata=""){
+	sleep,0 ;don't know why...but is needed
+	s:=xget("settings"),h:=hwnd()
+	for win,num in h
+	if !instr(win,"h"){
+		if winnum && winnum!=win
+		continue
+		if (win=2||win=3){
+			for a,b in {w:140,h:400}
+			if  !value:=ssn(s,"//*[@window='" win "']/@" a)
+			%a%:=b
+			else
+			%a%:=value.text
+			gui,%win%:show,x0 y0 w%w% h%h%
+			Style:=ssn(s,"//Window" win "/@style").text
+			WinSet,Style,%Style%,ahk_id %num%
+			controlmove,,,,,% w+1,ahk_id %num%
+			controlmove,,,,,% w,ahk_id %num%
+		}
+		if win>3
+		{
+			for b,a in ["x","y","w","h"]
+			if  !value:=ssn(s,"//*[@window='" win "']/@" a)
+			position=xcenter ycenter AutoSize
+			else
+			position.=a value.text " "
+			gui,%win%:show,%position% Hide,% info.title
+			if value:=ssn(s,"//*[@window='" win "']/@style").text
+			WinSet,Style,%value%,ahk_id %num%
+		}
+	}
+	if !winnum
+	{
+		max:=ssn(s,"//*[@window='1']/@max").Text
+		for a,b in {x:"center",y:"center",w:800,h:600}
+		if  !value:=ssn(s,"//*[@window='1']/@" a)
+		%a%:=b
+		else
+		%a%:=value.text
+		gui,1:show,x%x% y%y% w%w% h%h%
+		if Max
+		WinMaximize,% hwnd("h1")
+	}
+}

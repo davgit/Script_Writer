@@ -1,0 +1,6 @@
+post_to_ahknet(){
+	script:=publish(1)
+	m("Sorry I can not make this any more elegant but the captia stuff has my hands tied.`nScript coppied to Clipboard")
+	Clipboard:=script
+	run,http://www.autohotkey.net/paste
+}

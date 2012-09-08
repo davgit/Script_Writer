@@ -1,0 +1,33 @@
+savepos(){
+	h:=hwnd()
+	for a,b in h
+	if !instr(a,"h"){
+		if !a
+		continue
+		WinGetTitle,title,% hwnd("h" a)
+		if !title
+		continue
+		wingetpos,x,y,,,ahk_id %b%
+		VarSetCapacity(Rect,16,0)
+		DllCall("GetClientRect", "uint", b, "uint", &rect)
+		w:=numget(Rect,8,"Int")
+		h:=NumGet(Rect,12,"Int")
+		if a=1
+		xx:=x,yy:=y
+		if a=2 || a=3
+		x-=xx,y-=yy
+		WinGet,max,MinMax,% hwnd("h" a)
+		if max
+		{
+			p:=xx("settings","Gui/Position",{max:max},,{window:a})
+			continue
+		}
+		WinGet,Style,Style,ahk_id %b%
+		if (w!=0||h!=0)
+		xx("settings","Gui/Position",{window:a,x:x,y:y,w:w,h:h,style:style,max:0},,{window:a})
+	}
+	return
+	GuiEscape:
+	savepos()
+	return
+}

@@ -1,0 +1,8 @@
+moveselectedline(){
+	movelineup:
+	sc(2620)
+	return
+	movelinedown:
+	sc(2621)
+	return
+}

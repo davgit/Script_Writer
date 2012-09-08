@@ -1,0 +1,36 @@
+edit_highlight_text(){
+	Gui,14:Destroy 
+	Gui,14:Default
+	Gui,+Owner1 +hwndeht +Resize
+	hwnd(14,eht),colors()
+	Gui,Add,Text,x0 y0,Highlight lists are separated by a single space. (each word one space)
+	Gui,Add,ListView,x0 w300 h500 AltSubmit ghighlight,List
+	Gui,Add,Edit,x+5 gupdatelist w495 h500
+	applypos(14,{x:"center",y:"center",w:500,h:500})
+	loop,3
+	LV_Add("","Keyword List " A_Index)
+	LV_Modify(1,"select Focus")
+	return
+	14guiclose:
+	14guiescape:
+	keywords(98),savepos()
+	Gui,14:Destroy
+	return
+	14guisize:
+	ControlGetPos,x,y,w,,SysListView321
+	ControlMove,SysListView321,,,,% A_GuiHeight-y
+	ControlMove,Edit1,,,% A_GuiWidth-w-5,% A_GuiHeight-y
+	return
+	highlight:
+	if A_GuiEvent not in normal,i
+	return
+	LV_GetText(list,LV_GetNext())
+	key:=xg({settings:"//" clean(list)})
+	ControlSetText,Edit1,% key.text
+	return
+	updatelist:
+	LV_GetText(list,LV_GetNext())
+	ControlGetText,text,Edit1
+	xadd("settings","Keywords/" clean(list),"",text)
+	return
+}

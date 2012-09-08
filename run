@@ -1,0 +1,10 @@
+run(){
+	save()
+	main:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text
+	SplitPath,main,name,dir
+	debug:=xg({settings:"//Debug"}).text
+	if debug
+	rundebug()
+	else
+	run,%name%,%dir%
+}

@@ -1,0 +1,29 @@
+toggle_comment_line(){
+	start:=sc(2008),end:=sc(2009)
+	if (start>end)
+	start:=sc(2009),end:=sc(2008),count:=0
+	startline:=sc(2166,start)
+	endline:=sc(2166,end)
+	if (startline<endline)
+	while,startline<=endline
+	{
+		lineind:=sc(2128,startline),linestart:=sc(2167,startline)
+		if (startline=endline)
+		if (lineind>end)
+		break
+		letter:=textrange(min:=sc(2128,startline),min+1)
+		if (letter=";")
+		sc(2190,min),sc(2192,min+1),sc(2194,0,""),end--
+		else
+		sc(2190,min),sc(2192,min),sc(2194,1,";"),end++
+		startline++
+	}
+	else
+	{
+		letter:=textrange(min:=sc(2128,startline),min+1)
+		if (letter=";")
+		sc(2190,min),sc(2192,min+1),sc(2194,0,"")
+		else
+		sc(2190,min),sc(2192,min),sc(2194,1,";")
+	}
+}

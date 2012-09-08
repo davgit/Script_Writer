@@ -1,0 +1,14 @@
+insert_function(){
+	InputBox,name,Function name,Input the name of the function
+	if (ErrorLevel || name="")
+	return
+	InputBox,options,Function Options,Input the options for this function (eg. function(*this information) )
+	if ErrorLevel
+	return
+	sc(2003,sc(2008),clean(name) "(" options "){`r`n`r`n}")
+	fix_indent()
+	send,{down}{right}
+	WinGet,style,style,% hwnd("h3")
+	if (style&0x10000000)
+	coderefresh()
+}

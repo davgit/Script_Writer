@@ -1,0 +1,53 @@
+export_github(){
+	window({num:15,title:"Github copy",gui:["Text,,Select the files you wish to exclude from being sent to a separate directory`nfor creating a github repository","ListView,w800 h500 Checked multi,Files|Extension","Button,gsa,Select all","Button,gsn,Select none","Button,Default ggit,Copy"]
+	,GuiSize:{Button1:"y",SysListView321:"wh",Edit1:"w",Button2:"y",Button3:"y"}})
+	save(),xml:=xget("files")
+	mainfile:=ssn(xfind(xml,,"@sc",sc(2357)),"../@main").text
+	SplitPath,mainfile,,dir,,name
+	git:=% dir "\" clean(name) "\"
+	select:=xg({git:"//*[@file='" mainfile "']"}).Text
+	Loop,%dir%\*.*
+	{
+		SplitPath,A_LoopFileName,,,ext
+		check:=InStr(select,A_LoopFileName)?"Check":""
+		LV_Add(check,A_LoopFileName,ext)
+	}
+	Loop,2
+	LV_ModifyCol(A_Index,"AutoHDR")
+	Gui,15:show
+	sleep,100
+	WinActivate,Github copy
+	return
+	git:
+	save(),xml:=xget("files")
+	mainfile:=ssn(xfind(xml,,"@sc",sc(2357)),"../@main").text
+	SplitPath,mainfile,,dir,,name
+	git:=% dir "\" clean(name) "\"
+	SplashTextOn,500,200,Removing old files.,One moment please
+	Loop,%git%\*.*
+	FileDelete,% A_LoopFileFullPath
+	SplashTextOff
+	list:="",compare:=[]
+	row:=0
+	while,row:=LV_GetNext(row,"C"){
+		LV_GetText(e,row),list.=e " "
+		compare[e]:=e
+	}
+	Loop,%dir%\*.*
+	if !compare[A_LoopFileName]
+	FileCopy,%dir%\%A_LoopFileName%,%git%%A_LoopFileName%,1
+	Gui,15:Default
+	xx("git","git",{file:mainfile},,{file:mainfile}).text:=list
+	xsave("git")
+	return
+	sn:
+	sa:
+	Gui,15:Default
+	Loop,% LV_GetCount()
+	LV_Modify(A_Index,A_ThisLabel="sa"?"Check":"-Check")
+	return
+	15GuiEscape:
+	savepos()
+	Gui,15:Destroy
+	return
+}

@@ -1,0 +1,48 @@
+getpos(){
+	main:=xg({files:"//*[@sc='" sc(2357) "']/@file"})
+	if !Main.text
+	return
+	fold:=0
+	while,sc(2618,fold)>=0,fold:=sc(2618,fold)
+	list.=fold ",",fold++
+	fold:=trim(list,",")
+	parent:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).Text
+	mainfile:=main.text
+	p:=regexreplace(parent,"[^a-zA-Z]")
+	splitpath,mainfile,ff
+	m:=regexreplace(ff,"[^a-zA-Z]")
+	xpos({main:parent,file:m,lastfile:main.text,pos:{min:sc(2009),max:sc(2008),scroll:sc(2152),fold:fold}})
+	var({mainpos:{w:a_guiwidth,h:a_guiheight}})
+}
+setpos(){
+	file:=xg({files:"//*[@sc='" sc(2357) "']/@file"}).text
+	parent:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).Text
+	SplitPath,file,ff
+	f:=regexreplace(ff,"[^a-zA-Z]")
+	pos:=xg({positions:"//*[@main='" parent "']"})
+	if (pos.text){
+		foo:=sn(pos,f "/@*")
+		while,x:=foo.item[A_Index-1]{
+			item:=x.nodename,val:=x.text
+			%item%:=val
+		}
+		if !min
+		return
+		sc(2160,min,max),sc(2613,scroll)
+		Loop,Parse,fold,`,
+		sc(2231,A_LoopField)
+	}
+}
+xpos(file){
+	xml:=xget("positions"),root:=ssn(xml,"//positions")
+	main:=xg({positions:"//*[@main='" file.main "']"})
+	if !main
+	main:=xml.createelement("File"),root.appendchild(main)
+	main.setattribute("main",file.main),main.setattribute("segment",file.lastfile)
+	if !new:=ssn(main,file.file)
+	new:=xml.createelement(file.file)
+	for a,b in file.pos
+	new.setattribute(a,b)
+	new.text:="."
+	main.appendchild(new)
+}

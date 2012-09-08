@@ -1,0 +1,27 @@
+file_explorer(){
+	return togglewin(2)
+	fe:
+	if A_GuiEvent!=Normal
+	return
+	Gui,2:Default
+	select(ssn(xget("files"),"//*[@TreeView='" TV_GetSelection() "']/@file").text)
+	Gui,1:Default
+	ControlFocus,Scintilla1,% hwnd({h:1})
+	return
+}
+code_explorer(){
+	if togglewin(3)="+"
+	coderefresh()
+}
+togglewin(number){
+	window:=hwnd({h:number})
+	WinGet,style,style,%window%
+	switch:=!(style&0x10000000)?"+":"-"
+	WinSet,Style,%switch%0x10000000,%window%
+	WinSet,Redraw,,%window%
+	WinGetPos,xx,yy,w,h,%window%
+	WinGetPos,x,y,,,%window%
+	getwinpos(x,y,w,h,hwnd(1))
+	GuiSize(w,h)
+	return switch
+}

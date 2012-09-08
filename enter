@@ -1,0 +1,27 @@
+enter(){
+	enter:
+	if sc(2102){
+		send,{Enter}
+		return
+	}
+	start:=sc(2008)-1,end:=sc(2136,sc(2166,sc(2008)))
+	while start<end,start++
+	{
+		char:=sc(2007,start)
+		if char in 123,40,91
+		break
+		if char in 125,93,41
+		{
+			if sc(2353,start)=start-1
+			break
+			sc(2160,end,end)
+			break
+		}
+	}
+	send,{enter}
+	fix_indent()
+	char:=sc(2007,sc(2008))
+	if sc(2127,sc(2166,sc(2008)))
+	send ^{right}
+	return
+}

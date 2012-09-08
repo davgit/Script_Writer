@@ -1,0 +1,46 @@
+jump_to_segment(x=""){
+	static
+	xml:=xget("files"),mainfile:=ssn(xfind(xml,,"@sc",sc(2357)),"../@main")
+	window({num:4,title:"Jump to Segment",gui:["Edit,w400 gpopup vedit","ListView,w400 h500 -multi," mainfile.text,"Button,Default gjts,Jump"]
+	,GuiSize:{Button1:"y",SysListView321:"wh",Edit1:"w"}})
+	hotkey([4,"down","down"],[4,"up","up"])
+	gosub,populate
+	return
+	jts:
+	lv_gettext(jump,lv_getnext())
+	StringLower,jump,jump
+	if lv_getnext()
+	select(ssn(xfind(mainfile,"../*","@name",jump),"@file").text)
+	Gui,4:destroy
+	return
+	4GuiClose:
+	4guiescape:
+	savepos()
+	Gui,4:Destroy
+	return
+	populate:
+	Gui,4:Default
+	lv_delete()
+	StringLower,ff,edit
+	mf:=ssn(xml,"//*[@sc='" sc(2357) "']..")
+	codes:=ff?sn(mf,"*[contains(@name,'" ff "')]"):sn(mf,"*[@name]")
+	while,value:=ssn(codes.item[A_Index-1],"@file"){
+		value:=value.text
+		SplitPath,value,File,dir
+		lv_add("",file)
+	}
+	lv_modify(1,"select"),edit:=""
+	return
+	popup:
+	Gui,4:Submit,NoHide
+	ControlGetText,edit,Edit1
+	gosub,populate
+	return
+	down:
+	up:
+	Gui,4:default
+	mod:=a_thislabel="up"?lv_getnext()-1:lv_getnext()+1
+	mod:=mod?mod:1
+	lv_modify(mod,"select vis")
+	return
+}

@@ -1,0 +1,21 @@
+Previous_Segment(){
+	script_tracker({count:-1})
+}
+Next_Segment(){
+	script_tracker({count:1})
+}
+script_tracker(name){
+	static current,select,total
+	if IsObject(name){
+		if (current+name.count<1 || current+name.count>total)
+		return
+		current+=name.count
+		select=1
+		select(xg({history:"//file" current}).text)
+		return
+	}
+	if !select
+	xadd("history","file" current:=sn(xget("history"),"/*/*").length+1,name)
+	total:=sn(xget("history"),"/*/*").length
+	select=0
+}

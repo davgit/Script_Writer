@@ -1,0 +1,9 @@
+export(){
+	FileSelectFile,filename,S 16,,Export file as?,AHK (*.ahk)
+	if ErrorLevel
+	return
+	filename:=InStr(filename,".ahk")?filename:filename ".ahk"
+	IfExist,%filename%
+	FileDelete,%filename%
+	FileAppend,% publish(1),%filename%
+}

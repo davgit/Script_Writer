@@ -1,0 +1,29 @@
+remove_current_segment(){
+	file:=xg({files:"//*[@sc='" sc(2357) "']/@file"})
+	main:=ssn(file,"../../@main")
+	mf:=ssn(main,"../mainfile")
+	f:=file.Text,maintext:=update({get:main.text})
+	SplitPath,f,filename
+	if main.text=file.Text
+	return m("The main segment can not be removed")
+	MsgBox,4,Are you sure?,Remove %current% from the current project?
+	IfMsgBox,no
+	return
+	MsgBox,4,Delete the file from your computer?,Also delete the file?
+	IfMsgBox,Yes
+	FileDelete,% file.Text
+	update({delete:file.text})
+	Gui,2:Default
+	TV_Delete(TV_GetSelection())
+	sc(2377,,ssn(file,"../@sc").text)
+	remove:=ssn(file,"..")
+	remove.parentNode.removeChild(remove)
+	pos:=RegExMatch(maintext,"Ui)#include.*\b" filename "\b",found)
+	replaced:=RegExReplace(maintext,found,"","",1)
+	Loop,Parse,replaced,`r`n,`r`n
+	if A_LoopField
+	rep.=A_LoopField "`r`n"
+	mf.removeattribute("sc")
+	update({fn:main.text,contents:rep})
+	select(main.text)
+}

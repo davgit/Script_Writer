@@ -1,0 +1,13 @@
+Insert_Braces_around_Selection(){
+	start:=sc(2143),end:=sc(2145)
+	sc(2078)
+	sc(2003,end,"}"),sc(2003,start,"{")
+	fix_indent()
+	sc(2079)
+}
+insert_parentheses_around_selection(){
+	sc(2078)
+	start:=sc(2143),end:=sc(2145)
+	sc(2003,end,")"),sc(2003,start,"(") 
+	sc(2079)
+} 

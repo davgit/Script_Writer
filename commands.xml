@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Commands>
+	<Version>
+		<Date>20120724210213</Date>
+	</Version>
+	<Commands>
+		<commands>#AllowSameLineComments</commands>
+		<commands syntax="milliseconds\nChanges how long the script keeps trying to access the clipboard when the first attempt fails.">#ClipboardTimeout</commands>
+		<commands syntax="NewString">#CommentFlag</commands>
+		<commands syntax="NewChar">#EscapeChar</commands>
+		<commands syntax="Value">#HotkeyInterval</commands>
+		<commands syntax="milliseconds">#HotkeyModifierTimeout</commands>
+		<commands syntax="NewOptions">#Hotstring</commands>
+		<commands syntax="[expression] \n[AutoHotkey_L] Makes subsequent hotkeys and hotstrings only function when the specified expression is true.">#if</commands>
+		<commands syntax="timeout \n[AutoHotkey_L] Sets the maximum time that may be spent evaluating a single #If expression.">#IfTimeout</commands>
+		<commands syntax="[, WinTitle, WinText] \nMakes subsequent hotkeys and hotstrings only function when the specified window is active.">#IfWinActive</commands>
+		<commands syntax="[, WinTitle, WinText] \nMakes subsequent hotkeys and hotstrings only function when the specified window exists.">#IfWinExist</commands>
+		<commands syntax="[, WinTitle, WinText] \nMakes subsequent hotkeys and hotstrings only function when the specified window is not active.">#IfWinNotActive</commands>
+		<commands syntax="[, WinTitle, WinText] \nMakes subsequent hotkeys and hotstrings only function when the specified window doesn't exist.">#IfWinNotExist</commands>
+		<commands syntax="FileName \nCauses the script to behave as though the specified file's contents are present at this exact position.">#Include</commands>
+		<commands syntax="FileName \nCauses the script to behave as though the specified file's contents are present at this exact position.">#IncludeAgain</commands>
+		<commands syntax="MaxEvents">#KeyHistory</commands>
+		<commands syntax="On|Off">#LTrim</commands>
+		<commands syntax="Value">#MaxHotkeysPerInterval</commands>
+		<commands syntax="ValueInMegabytes">#MaxMem</commands>
+		<commands syntax="Value">#MaxThreads</commands>
+		<commands syntax="On|Off">#MaxThreadsBuffer</commands>
+		<commands syntax="Value">#MaxThreadsPerHotkey</commands>
+		<commands syntax="keyname \n[AutoHotkey_L] Changes which key is used to mask Win or Alt keyup events.">#MenuMaskKey</commands>
+		<commands syntax="[force|ignore|off]">#SingleInstance</commands>
+		<commands syntax="[On|Off]">#UseHook</commands>
+		<commands syntax="[WarningType, WarningMode] \n[AutoHotkey_L] Enables or disables warnings for selected load-time or run-time conditions that may be indicative of developer errors.">#Warn</commands>
+		<commands syntax=", On|Off">AutoTrim</commands>
+		<commands syntax=", On|Off|Send|Mouse|SendAndMouse|Default|MouseMove|MouseMoveOff">BlockInput</commands>
+		<commands syntax="[, SecondsToWait, 1]">ClipWait</commands>
+		<commands syntax=", Cmd [, Value, Control, WinTitle, WinText, ExcludeTitle, ExcludeText]">Control</commands>
+		<commands syntax="[, Control-or-Pos, WinTitle, WinText, WhichButton, ClickCount, Options, ExcludeTitle, ExcludeText]">ControlClick</commands>
+		<commands syntax="[, Control, WinTitle, WinText, ExcludeTitle, ExcludeText]">ControlFocus</commands>
+		<commands syntax=", OutputVar, Cmd [, Value, Control, WinTitle, WinText, ExcludeTitle, ExcludeText]">ControlGet</commands>
+		<commands syntax=", OutputVar [WinTitle, WinText, ExcludeTitle, ExcludeText]">ControlGetFocus</commands>
+		<commands syntax="[, X, Y, Width, Height, Control, WinTitle, WinText, ExcludeTitle, ExcludeText]">ControlGetPos</commands>
+		<commands syntax=", OutputVar [, Control, WinTitle, WinText, ExcludeTitle, ExcludeText]">ControlGetText</commands>
+		<commands syntax=", Control, X, Y, Width, Height [, WinTitle, WinText, ExcludeTitle, ExcludeText]">ControlMove</commands>
+		<commands syntax="[, Control, Keys, WinTitle, WinText, ExcludeTitle, ExcludeText]">ControlSend</commands>
+		<commands syntax="[, Control, Keys, WinTitle, WinText, ExcludeTitle, ExcludeText]">ControlSendRaw</commands>
+		<commands syntax=", Control, NewText [, WinTitle, WinText, ExcludeTitle, ExcludeText]">ControlSetText</commands>
+		<commands syntax=", ToolTip|Pixel|Mouse [, Screen|Relative]">CoordMode</commands>
+		<commands syntax="[, Off]">Critical</commands>
+		<commands syntax=", On|Off">DetectHiddenText</commands>
+		<commands syntax=", On|Off">DetectHiddenWindows</commands>
+		<commands syntax=", Sub-command [, Drive , Value]">Drive</commands>
+		<commands syntax=", OutputVar, Cmd [, Value]">DriveGet</commands>
+		<commands syntax=", OutputVar, C:\\">DriveSpaceFree</commands>
+		<commands syntax=", Var, Value [, TimeUnits]">EnvAdd</commands>
+		<commands syntax=", Var, Value">EnvDiv</commands>
+		<commands syntax=", OutputVar, EnvVarName">EnvGet</commands>
+		<commands syntax=", Var, Value">EnvMult</commands>
+		<commands syntax=", EnvVar, Value">EnvSet</commands>
+		<commands syntax=", Var, Value [, TimeUnits]">EnvSub</commands>
+		<commands syntax="[, ExitCode]">Exit</commands>
+		<commands syntax="[, ExitCode]">ExitApp</commands>
+		<commands syntax="[, Text, Filename, Encoding]">FileAppend</commands>
+		<commands syntax=", Source, Dest [, Flag 1 = overwrite]">FileCopy</commands>
+		<commands syntax=", Source, Dest [, Flag]">FileCopyDir</commands>
+		<commands syntax=", Path">FileCreateDir</commands>
+		<commands syntax=", Target, C:\\My Shortcut.lnk [, WorkingDir, Args, Description, IconFile, ShortcutKey, IconNumber, RunState]">FileCreateShortcut</commands>
+		<commands syntax=", FilePattern">FileDelete</commands>
+		<commands syntax=", OutputVar, [, Filename]">FileGetAttrib</commands>
+		<commands syntax=", LinkFile [, OutTarget, OutDir, OutArgs, OutDescription, OutIcon, OutIconNum, OutRunState]">FileGetShortcut</commands>
+		<commands syntax=", OutputVar [, Filename, Units]">FileGetSize</commands>
+		<commands syntax=", OutputVar [, Filename, WhichTime [M, C, or A -- default is M]]">FileGetTime</commands>
+		<commands syntax=", OutputVar [, Filename]">FileGetVersion</commands>
+		<commands syntax=", Source, Dest [, Flag [1 = overwrite]]">FileInstall</commands>
+		<commands syntax=", Source, Dest [, Flag [1 = overwrite]]">FileMove</commands>
+		<commands syntax=", Source, Dest [, Flag [2 = overwrite]]">FileMoveDir</commands>
+		<commands syntax=", OutputVar, Filename">FileRead</commands>
+		<commands syntax=", OutputVar, Filename, LineNum">FileReadLine</commands>
+		<commands syntax=", FilePattern">FileRecycle</commands>
+		<commands syntax="[, C:\\]">FileRecycleEmpty</commands>
+		<commands syntax=", Path [, Recurse? [1 = yes]]">FileRemoveDir</commands>
+		<commands syntax=", OutputVar [, Options, RootDir[\\DefaultFilename], Prompt, Filter]">FileSelectFile</commands>
+		<commands syntax=", OutputVar [, *StartingFolder, Options, Prompt]">FileSelectFolder</commands>
+		<commands syntax=", Attributes[+-^RASHNOT] [, FilePattern, OperateOnFolders?, Recurse?]">FileSetAttrib</commands>
+		<commands syntax="[, YYYYMMDDHH24MISS, FilePattern, WhichTime [M|C|A], OperateOnFolders?, Recurse?]">FileSetTime</commands>
+		<commands syntax="key [,val] in obj \n[AutoHotkey_L]">for</commands>
+		<commands syntax=", OutputVar [, YYYYMMDDHH24MISS, Format]">FormatTime</commands>
+		<commands syntax=", OutputVar, WhichKey [, Mode [P|T]]">GetKeyState</commands>
+		<commands syntax=", Label\nJumps to the specified label and continues execution until Return is encountered.">gosub</commands>
+		<commands syntax=", Label\nJumps to the specified label and continues execution.">goto</commands>
+		<commands syntax=", GroupName [, R]">GroupActivate</commands>
+		<commands syntax=", GroupName, WinTitle [, WinText, Label, ExcludeTitle, ExcludeText]">GroupAdd</commands>
+		<commands syntax=", GroupName [, A|R]">GroupClose</commands>
+		<commands syntax=", GroupName [, R]">GroupDeactivate</commands>
+		<commands>Gui</commands>
+		<commands syntax=", Sub-command, ControlID [, Param3]">GuiControl</commands>
+		<commands syntax=", OutputVar [, Sub-command, ControlID, Param4]">GuiControlGet</commands>
+		<commands syntax=", KeyName [, Label, Options]">Hotkey</commands>
+		<commands syntax="Var = Value `n { `n commands `n }else{ `n commands`n}`nSpecifies the command[s] to perform if Var = Value [can be for other operators].`n`nVariants=[between],[contains],[in],[is]">if</commands>
+		<commands syntax="Var [not] between Low and High" var="between">if</commands>
+		<commands syntax="Var [not] contains value1,value2,..." var="contains">if</commands>
+		<commands syntax="Var [not] in value1,value2,..." var="in">if</commands>
+		<commands syntax="Var is [not] integer|float|number|digit|xdigit|alpha|upper|lower|alnum|space|time" var="is">if</commands>
+		<commands syntax=", var, value">IfEqual</commands>
+		<commands syntax=", File|Dir|Pattern">IfExist</commands>
+		<commands syntax=", var, value">IfGreater</commands>
+		<commands syntax=", var, value">IfGreaterOrEqual</commands>
+		<commands syntax=", Var, SearchString">IfInString</commands>
+		<commands syntax=", var, value">IfLess</commands>
+		<commands syntax=", var, value">IfLessOrEqual</commands>
+		<commands syntax=", Yes|No|OK|Cancel|Abort|Ignore|Retry|Timeout">IfMsgBox</commands>
+		<commands syntax=", var, value">IfNotEqual</commands>
+		<commands syntax=", File|Dir|Pattern">IfNotExist</commands>
+		<commands syntax=", Var, SearchString">IfNotInString</commands>
+		<commands syntax="[, WinTitle, WinText, ExcludeTitle, ExcludeText]">IfWinActive</commands>
+		<commands syntax="[, WinTitle, WinText, ExcludeTitle, ExcludeText]">IfWinExist</commands>
+		<commands syntax="[, WinTitle, WinText, ExcludeTitle, ExcludeText]">IfWinNotActive</commands>
+		<commands syntax="[, WinTitle, WinText, ExcludeTitle, ExcludeText]">IfWinNotExist</commands>
+		<commands syntax=", OutputVarX, OutputVarY, X1, Y1, X2, Y2, ImageFile">ImageSearch</commands>
+		<commands syntax=", Filename, Section [, Key]">IniDelete</commands>
+		<commands syntax=", OutputVar, Filename [, Section, Key, Default]\n[The Section and Key parameters are only optional on AutoHotkey_L]">IniRead</commands>
+		<commands syntax=", Value, Filename, Section [, Key]\n[The Key parameter is only optional on AutoHotkey_L]">IniWrite</commands>
+		<commands syntax="[, OutputVar, Options, EndKeys, MatchList]">Input</commands>
+		<commands syntax=", OutputVar [, Title, Prompt, HIDE, Width, Height, X, Y, Font, Timeout, Default]">InputBox</commands>
+		<commands syntax=", KeyName [, Options]">KeyWait</commands>
+		<commands>Loop</commands>
+		<commands syntax=", MenuName, Cmd [, P3, P4, P5]">Menu</commands>
+		<commands syntax=", WhichButton [, X, Y, ClickCount, Speed, D|U, R]">MouseClick</commands>
+		<commands syntax=", WhichButton, X1, Y1, X2, Y2 [, Speed, R]">MouseClickDrag</commands>
+		<commands syntax="[, OutputVarX, OutputVarY, OutputVarWin, OutputVarControl, 1|2|3]">MouseGetPos</commands>
+		<commands syntax=", X, Y [, Speed, R]">MouseMove</commands>
+		<commands syntax="[, Options, Title, Text, Timeout]\nDisplays the specified text in a small window containing one or more buttons  [such as Yes and No].">MsgBox</commands>
+		<commands syntax="[, Label]">OnExit</commands>
+		<commands syntax=", Text">OutputDebug</commands>
+		<commands syntax="[, On|Off|Toggle, OperateOnUnderlyingThread?]">Pause</commands>
+		<commands syntax=", OutputVar, X, Y [, Alt|Slow|RGB]">PixelGetColor</commands>
+		<commands syntax=", OutputVarX, OutputVarY, X1, Y1, X2, Y2, ColorID [, Variation, Fast|RGB]">PixelSearch</commands>
+		<commands syntax=", Msg [, wParam, lParam, Control, WinTitle, WinText, ExcludeTitle, ExcludeText]">PostMessage</commands>
+		<commands syntax=", Cmd, PID-or-Name [, Param3]">Process</commands>
+		<commands syntax=", Param1 [, SubText, MainText, WinTitle, FontName]">Progress</commands>
+		<commands syntax=", OutputVar [, Min, Max]">Random</commands>
+		<commands syntax=", HKLM|HKU|HKCU|HKCR|HKCC, SubKey [, ValueName]">RegDelete</commands>
+		<commands syntax=", OutputVar, HKLM|HKU|HKCU|HKCR|HKCC, SubKey [, ValueName]">RegRead</commands>
+		<commands syntax=", REG_SZ|REG_EXPAND_SZ|REG_MULTI_SZ|REG_DWORD|REG_BINARY, HKLM|HKU|HKCU|HKCR|HKCC, SubKey [, ValueName, Value]">RegWrite</commands>
+		<commands syntax="[, Expression]">return</commands>
+		<commands syntax=", Target [, WorkingDir, Max|Min|Hide|UseErrorLevel, OutputVarPID]">Run</commands>
+		<commands syntax="[, User, Password, Domain] ">RunAs</commands>
+		<commands syntax=", Target [, WorkingDir, Max|Min|Hide|UseErrorLevel, OutputVarPID]">RunWait</commands>
+		<commands syntax=", Keys">Send</commands>
+		<commands syntax=", Keys">SendEvent</commands>
+		<commands syntax=", Keys">SendInput</commands>
+		<commands syntax=", Msg [, wParam, lParam, Control, WinTitle, WinText, ExcludeTitle, ExcludeText]">SendMessage</commands>
+		<commands syntax=", Event|Play|Input|InputThenPlay">SendMode</commands>
+		<commands syntax=", Keys">SendPlay</commands>
+		<commands syntax=", Keys">SendRaw</commands>
+		<commands syntax=", -1 | 20ms | LineCount">SetBatchLines</commands>
+		<commands syntax=", On|Off|AlwaysOn|AlwaysOff">SetCapsLockState</commands>
+		<commands syntax=", Delay">SetControlDelay</commands>
+		<commands syntax=", Speed">SetDefaultMouseSpeed</commands>
+		<commands syntax=", Var, Value">SetEnv</commands>
+		<commands syntax=", float|integer, TotalWidth.DecimalPlaces|hex|d">SetFormat</commands>
+		<commands syntax="[, Delay, PressDuration]">SetKeyDelay</commands>
+		<commands syntax=", Delay">SetMouseDelay</commands>
+		<commands syntax=", On|Off|AlwaysOn|AlwaysOff">SetNumLockState</commands>
+		<commands syntax=", On|Off|AlwaysOn|AlwaysOff">SetScrollLockState</commands>
+		<commands syntax=", On|Off">SetStoreCapslockMode</commands>
+		<commands syntax=", Label [, Period|On|Off]">SetTimer</commands>
+		<commands syntax=", Fast|Slow|RegEx|1|2|3">SetTitleMatchMode</commands>
+		<commands syntax=", Delay">SetWinDelay</commands>
+		<commands syntax=", DirName">SetWorkingDir</commands>
+		<commands syntax=", Code">Shutdown</commands>
+		<commands syntax=", Delay">Sleep</commands>
+		<commands syntax=", VarName [, Options]">Sort</commands>
+		<commands syntax="[, Frequency, Duration]">SoundBeep</commands>
+		<commands syntax=", OutputVar [, ComponentType, ControlType, DeviceNumber]">SoundGet</commands>
+		<commands syntax=", OutputVar [, DeviceNumber]">SoundGetWaveVolume</commands>
+		<commands syntax=", Filename [, wait]">SoundPlay</commands>
+		<commands syntax=", NewSetting [, ComponentType, ControlType, DeviceNumber]">SoundSet</commands>
+		<commands syntax=", Percent [, DeviceNumber]">SoundSetWaveVolume</commands>
+		<commands syntax="[, ImageFile, Options, SubText, MainText, WinTitle, FontName]">SplashImage</commands>
+		<commands syntax="[, Width, Height, Title, Text]">SplashTextOn</commands>
+		<commands syntax=", InputVar [, OutFileName, OutDir, OutExtension, OutNameNoExt, OutDrive]">SplitPath</commands>
+		<commands syntax=", OutputVar [, Part#, WinTitle, WinText, ExcludeTitle, ExcludeText]">StatusBarGetText</commands>
+		<commands syntax="[, BarText, Seconds, Part#, WinTitle, WinText, Interval, ExcludeTitle, ExcludeText]">StatusBarWait</commands>
+		<commands syntax=", On|Off|Locale">StringCaseSense</commands>
+		<commands syntax=", OutputVar, InputVar, SearchText [, L#|R#, Offset]">StringGetPos</commands>
+		<commands syntax=", OutputVar, InputVar, Count">StringLeft</commands>
+		<commands syntax=", OutputVar, InputVar">StringLen</commands>
+		<commands syntax=", OutputVar, InputVar [, T]">StringLower</commands>
+		<commands syntax=", OutputVar, InputVar, StartChar [, Count, L]">StringMid</commands>
+		<commands syntax=", OutputVar, InputVar, SearchText [, ReplaceText, All]">StringReplace</commands>
+		<commands syntax=", OutputVar, InputVar, Count">StringRight</commands>
+		<commands syntax=", OutputArray, InputVar [, Delimiters, OmitChars]">StringSplit</commands>
+		<commands syntax=", OutputVar, InputVar, Count">StringTrimLeft</commands>
+		<commands syntax=", OutputVar, InputVar, Count">StringTrimRight</commands>
+		<commands syntax=", OutputVar, InputVar [, T]">StringUpper</commands>
+		<commands syntax="[, On|Off|Toggle|Permit]">Suspend</commands>
+		<commands syntax=", OutputVar, Sub-command [, Param3]">SysGet</commands>
+		<commands syntax=", Setting, P2 [, P3]">Thread</commands>
+		<commands syntax="[, Text, X, Y, WhichToolTip]">ToolTip</commands>
+		<commands syntax=", OutputVar, Cmd, Value1 [, Value2]">Transform</commands>
+		<commands syntax="[, Title, Text, Seconds, Options]">TrayTip</commands>
+		<commands syntax="Expression \n[AutoHotkey_L]">until</commands>
+		<commands syntax=", URL, Filename">URLDownloadToFile</commands>
+		<commands syntax="Expression">while</commands>
+		<commands syntax="[, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinActivate</commands>
+		<commands syntax="[, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinActivateBottom</commands>
+		<commands syntax="[, WinTitle, WinText, SecondsToWait, ExcludeTitle, ExcludeText]">WinClose</commands>
+		<commands syntax=", OutputVar [, Cmd, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinGet</commands>
+		<commands syntax=", Title, Width, Height, X, Y">WinGetActiveStats</commands>
+		<commands syntax=", OutputVar">WinGetActiveTitle</commands>
+		<commands syntax=", OutputVar [, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinGetClass</commands>
+		<commands syntax="[, X, Y, Width, Height, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinGetPos</commands>
+		<commands syntax=", OutputVar [, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinGetText</commands>
+		<commands syntax=", OutputVar [, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinGetTitle</commands>
+		<commands syntax="[, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinHide</commands>
+		<commands syntax="[, WinTitle, WinText, SecondsToWait, ExcludeTitle, ExcludeText]">WinKill</commands>
+		<commands syntax="[, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinMaximize</commands>
+		<commands syntax=", WinTitle, WinText, Menu [, SubMenu1, SubMenu2, SubMenu3, SubMenu4, SubMenu5, SubMenu6, ExcludeTitle, ExcludeText]">WinMenuSelectItem</commands>
+		<commands syntax="[, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinMinimize</commands>
+		<commands syntax=", WinTitle, WinText, X, Y [, Width, Height, ExcludeTitle, ExcludeText]">WinMove</commands>
+		<commands syntax="[, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinRestore</commands>
+		<commands syntax=", AlwaysOnTop|Trans, On|Off|Toggle|Value[0-255] [, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinSet</commands>
+		<commands syntax=", WinTitle, WinText, NewTitle [, ExcludeTitle, ExcludeText]">WinSetTitle</commands>
+		<commands syntax="[, WinTitle, WinText, ExcludeTitle, ExcludeText]">WinShow</commands>
+		<commands syntax=", WinTitle, WinText, Seconds [, ExcludeTitle, ExcludeText]">WinWait</commands>
+		<commands syntax="[, WinTitle, WinText, Seconds, ExcludeTitle, ExcludeText]">WinWaitActive</commands>
+		<commands syntax=", WinTitle, WinText, Seconds [, ExcludeTitle, ExcludeText]">WinWaitClose</commands>
+		<commands syntax="[, WinTitle, WinText, Seconds, ExcludeTitle, ExcludeText]">WinWaitNotActive</commands>
+		<commands syntax="(Number)">Abs</commands>
+		<commands syntax="(Number)">ACos</commands>
+		<commands syntax="(String)">Asc</commands>
+		<commands syntax="(Number)">ASin</commands>
+		<commands syntax="(Number)">ATan</commands>
+		<commands syntax="(Number)">Ceil</commands>
+		<commands syntax="(Number)">Chr</commands>
+		<commands syntax="(Number)">Cos</commands>
+		<commands syntax="(&quot;[DllFile\\]Function&quot; [, Type1, Arg1, Type2, Arg2, ..., &quot;Cdecl ReturnType&quot;])">DllCall</commands>
+		<commands syntax="(Number)">Exp</commands>
+		<commands syntax="(&quot;FilePattern&quot;)">FileExist</commands>
+		<commands syntax="(Number)">Floor</commands>
+		<commands syntax="(KeyName [, &quot;P&quot; or &quot;T&quot;])">GetKeyState</commands>
+		<commands syntax="(ImageListID, Filename [, IconNumber, ResizeNonIcon?])">IL_Add</commands>
+		<commands syntax="([InitialCount, GrowCount, LargeIcons?])">IL_Create</commands>
+		<commands syntax="(ImageListID)">IL_Destroy</commands>
+		<commands syntax="(Haystack, Needle [, CaseSensitive?, StartingPos, Occurrence])\n(The Occurrence parameter only exists in AutoHotkey_L)">InStr</commands>
+		<commands syntax="(FunctionName)">IsFunc</commands>
+		<commands syntax="(LabelName)">IsLabel</commands>
+		<commands syntax="(Number)">Ln</commands>
+		<commands syntax="(Number)">Log</commands>
+		<commands syntax="([Options, Col1, Col2, ...])">LV_Add</commands>
+		<commands syntax="([RowNumber])">LV_Delete</commands>
+		<commands syntax="(ColumnNumber)">LV_DeleteCol</commands>
+		<commands syntax="([&quot;S&quot;])">LV_GetCount</commands>
+		<commands syntax="([StartingRowNumber, &quot;C|F&quot;])">LV_GetNext</commands>
+		<commands syntax="(OutputVar, RowNumber [, ColumnNumber])">LV_GetText</commands>
+		<commands syntax="(RowNumber [, Options, Col1, Col2, ...])">LV_Insert</commands>
+		<commands syntax="(ColumnNumber [, Options, ColumnTitle])">LV_InsertCol</commands>
+		<commands syntax="(RowNumber, Options [, NewCol1, NewCol2, ...])">LV_Modify</commands>
+		<commands syntax="([ColumnNumber, Options, ColumnTitle])">LV_ModifyCol</commands>
+		<commands syntax="(ImageListID [, 0|1|2])">LV_SetImageList</commands>
+		<commands syntax="(Dividend, Divisor)">Mod</commands>
+		<commands syntax="(VarOrAddress [, Offset = 0] [, Type = &quot;UPtr&quot;])\n(When Type is specified the Offset parameter is only optional in AutoHotkey_L)">NumGet</commands>
+		<commands syntax="(Number, VarOrAddress [, Offset = 0] [, Type = &quot;UPtr&quot;])\n(When Type is specified the Offset parameter is only optional in AutoHotkey_L)">NumPut</commands>
+		<commands syntax="(MsgNumber [, &quot;FunctionName&quot;])">OnMessage</commands>
+		<commands syntax="(Haystack, NeedleRegEx [, UnquotedOutputVar = &quot;&quot;, StartingPos = 1])">RegExMatch</commands>
+		<commands syntax="(Haystack, NeedleRegEx [, Replacement = &quot;&quot;, OutputVarCount = &quot;&quot;, Limit = -1, StartingPos = 1])">RegExReplace</commands>
+		<commands syntax="(&quot;FunctionName&quot; [, Options = &quot;&quot;, ParamCount = FormalCount, EventInfo = Address])">RegisterCallback</commands>
+		<commands syntax="(Number [, Places])">Round</commands>
+		<commands syntax="(Filename [, IconNumber, PartNumber])">SB_SetIcon</commands>
+		<commands syntax="([Width1, Width2, ... Width255])">SB_SetParts</commands>
+		<commands syntax="(NewText [, PartNumber, Style])">SB_SetText</commands>
+		<commands syntax="(Number)">Sin</commands>
+		<commands syntax="(Number)">Sqrt</commands>
+		<commands syntax="(String)">StrLen</commands>
+		<commands syntax="(String, StartingPos [, Length])">SubStr</commands>
+		<commands syntax="(Number)">Tan</commands>
+		<commands syntax="(Name, [ParentItemID, Options])">TV_Add</commands>
+		<commands syntax="([ItemID])">TV_Delete</commands>
+		<commands syntax="(ParentItemID)">TV_GetChild</commands>
+		<commands syntax="()">TV_GetCount</commands>
+		<commands syntax="([ItemID, &quot;Checked | Full&quot;])">TV_GetNext</commands>
+		<commands syntax="(ItemID, &quot;Expand | Check | Bold&quot;)">TV_Get</commands>
+		<commands syntax="(ItemID)">TV_GetParent</commands>
+		<commands syntax="(ItemID)">TV_GetPrev</commands>
+		<commands syntax="()">TV_GetSelection</commands>
+		<commands syntax="(OutputVar, ItemID)">TV_GetText</commands>
+		<commands syntax="(ItemID [, Options, NewName])">TV_Modify</commands>
+		<commands syntax="(Var [, RequestedCapacity, FillByte])">VarSetCapacity</commands>
+		<commands syntax="(&quot;WinTitle&quot; [, &quot;WinText&quot;, &quot;ExcludeTitle&quot;, &quot;ExcludeText&quot;])">WinActive</commands>
+		<commands syntax="(&quot;WinTitle&quot; [, &quot;WinText&quot;, &quot;ExcludeTitle&quot;, &quot;ExcludeText&quot;])">WinExist</commands>
+		<commands syntax="(string [, omitchars = &quot; `t&quot;]) \n[AutoHotkey_L] Trims characters from the beginning and end of a string.">Trim</commands>
+		<commands syntax="(string [, omitchars = &quot; `t&quot;]) \n[AutoHotkey_L] Trims characters from the beginning of a string.">LTrim</commands>
+		<commands syntax="(string [, omitchars = &quot; `t&quot;]) \n[AutoHotkey_L] Trims characters from the end of a string.">RTrim</commands>
+		<commands syntax="[, CPnnn|UTF-8/16[-RAW] ] \n[AutoHotkey_L] Sets the default encoding for FileRead, FileReadLine, Loop Read, FileAppend, and FileOpen.">FileEncoding</commands>
+		<commands syntax="(file, mode[, encoding]) \n[AutoHotkey_L] Opens a file and returns a new file object.">FileOpen</commands>
+		<commands syntax="(address [, max][, encoding]) \n[AutoHotkey_L] Retrieves the null-terminated string at the specified address.">StrGet</commands>
+		<commands syntax="(string [, encoding]) \n[AutoHotkey_L] Retrieves the amount of characters (not bytes) that a string copy requires.">StrPut</commands>
+		<commands syntax="(string, address [, max][, encoding]) \n[AutoHotkey_L] Copies a string to the specified location.">StrPut</commands>
+		<commands syntax="([key, value, [key2, value2...]]) \n[AutoHotkey_L] Creates a scriptable object which is also an associative array.">Object</commands>
+		<commands syntax="(obj) \n[AutoHotkey_L] Retrieves an interface pointer from an object reference or vice versa.">Object</commands>
+		<commands syntax="([values...]) \n[AutoHotkey_L] Creates an array.">Array</commands>
+		<commands syntax="(param) \n[AutoHotkey_L] Tests if the parameter is an object.">IsObject</commands>
+		<commands syntax="(obj, index, values...) \n[AutoHotkey_L]">ObjInsert</commands>
+		<commands syntax="(value) \n[AutoHotkey_L]">ObjInsert</commands>
+		<commands syntax="(key, value) \n[AutoHotkey_L]">ObjInsert</commands>
+		<commands syntax="(index, values...) \n[AutoHotkey_L] ??">_Insert</commands>
+		<commands syntax="(value) \n[AutoHotkey_L]">_Insert</commands>
+		<commands syntax="(key, value) \n[AutoHotkey_L]">_Insert</commands>
+		<commands syntax="(obj, key) \n[AutoHotkey_L]">ObjRemove</commands>
+		<commands syntax="(obj, first, last) \n[AutoHotkey_L]">ObjRemove</commands>
+		<commands syntax="(key) \n[AutoHotkey_L]">_Remove</commands>
+		<commands syntax="(first, last) \n[AutoHotkey_L]">_Remove</commands>
+		<commands syntax="(obj) \n[AutoHotkey_L]">ObjMinIndex</commands>
+		<commands syntax="() \n[AutoHotkey_L]">_MinIndex</commands>
+		<commands syntax="(obj) \n[AutoHotkey_L]">ObjMaxIndex</commands>
+		<commands syntax="() \n[AutoHotkey_L]">_MaxIndex</commands>
+		<commands syntax="(obj, maxitems) \n[AutoHotkey_L]">ObjSetCapacity</commands>
+		<commands syntax="(obj, key, bytesize) \n[AutoHotkey_L]">ObjSetCapacity</commands>
+		<commands syntax="(maxitems) \n[AutoHotkey_L]">_SetCapacity</commands>
+		<commands syntax="(key, bytesize) \n[AutoHotkey_L]">_SetCapacity</commands>
+		<commands syntax="(obj[, key]) \n[AutoHotkey_L]">ObjGetCapacity</commands>
+		<commands syntax="([key]) \n[AutoHotkey_L]">_GetCapacity</commands>
+		<commands syntax="(obj, key) \n[AutoHotkey_L]">ObjGetAddress</commands>
+		<commands syntax="(key) \n[AutoHotkey_L]">_GetAddress</commands>
+		<commands syntax="(obj) \n[AutoHotkey_L]">ObjNewEnum</commands>
+		<commands syntax="() \n[AutoHotkey_L]">_NewEnum</commands>
+		<commands syntax="(obj) \n[AutoHotkey_L]">ObjAddRef</commands>
+		<commands syntax="() \n[AutoHotkey_L]">_AddRef</commands>
+		<commands syntax="(obj) \n[AutoHotkey_L]">ObjRelease</commands>
+		<commands syntax="() \n[AutoHotkey_L]">_Release</commands>
+		<commands syntax="(obj, key) \n[AutoHotkey_L]">ObjHasKey</commands>
+		<commands syntax="(key) \n[AutoHotkey_L]">_HasKey</commands>
+		<commands syntax="(obj) \n[AutoHotkey_L]">ObjClone</commands>
+		<commands syntax="() \n[AutoHotkey_L]">_Clone</commands>
+		<commands syntax="([params...]) \n[AutoHotkey_L]">__Get</commands>
+		<commands syntax="([params...,] value) \n[AutoHotkey_L]">__Set</commands>
+		<commands syntax="([params...]) \n[AutoHotkey_L]">__Call</commands>
+		<commands syntax="() \n[AutoHotkey_L]">__Delete</commands>
+		<commands syntax="(ProgIdOrCLSID [, IID]) \n[AutoHotkey_L] Creates a COM object.">ComObjCreate</commands>
+		<commands syntax="(name) \n[AutoHotkey_L] Returns a reference to an object provided by a COM component.">ComObjGet</commands>
+		<commands syntax="(obj [, prefix])  \n[AutoHotkey_L] Listens to events from a ComObject (omit prefix to stop listening).">ComObjConnect</commands>
+		<commands syntax="([Enable])\nEnables or disables notification of COM errors. If Enable is omitted, the current setting is returned.">ComObjError</commands>
+		<commands syntax="(ProgIdOrCLSID) \n[AutoHotkey_L] Retrieves a running object that has been registered with OLE.">ComObjActive</commands>
+		<commands syntax="(pdisp) \n[AutoHotkey_L] Wraps a raw IDispatch pointer in a usable object.">ComObjEnwrap</commands>
+		<commands syntax="(obj) \n[AutoHotkey_L] Unwraps a raw IDispatch pointer in a usable object.">ComObjUnwrap</commands>
+		<commands syntax="(vt, val [, flags]) \n[AutoHotkey_L] Packs type and value information in a single parameter.">ComObjParameter</commands>
+		<commands syntax="(obj [, &quot;Name&quot;/&quot;IID&quot;]) \n[AutoHotkey_L] Retrieves type information for a COM object.">ComObjType</commands>
+		<commands syntax="(obj) \n[AutoHotkey_L] Retrieves the raw 64-bit signed integer stored in a ComObject wrapper.">ComObjValue</commands>
+		<commands syntax="() \n[AutoHotkey_L] Creates an object for use in place of an optional parameter's default value when calling a COM object.">ComObjMissing</commands>
+		<commands syntax="(VarType, Count1 [, Count2, ... Count8]) \n[AutoHotkey_L] Creates a SAFEARRAY for use with COM.">ComObjArray</commands>
+		<commands syntax="(ComObject [, SID], IID) \n[AutoHotkey_L] Queries a COM object for an interface or service.">ComObjQuery</commands>
+		<commands syntax="(ComObject [, NewFlags, Mask]) \n[AutoHotkey_L] Retrieves or changes flags which control a COM wrapper object's behaviour.">ComObjFlags</commands>
+	</Commands>
+	<Items>
+		<item>#ErrorStdOut</item>
+		<item>#InstallKeybdHook</item>
+		<item>#InstallMouseHook</item>
+		<item>#NoEnv</item>
+		<item>#NoTrayIcon</item>
+		<item>#Persistent</item>
+		<item>#WinActivateForce</item>
+		<item>break</item>
+		<item>Click</item>
+		<item>continue</item>
+		<item>Edit</item>
+		<item>else</item>
+		<item>EnvUpdate</item>
+		<item>ListHotkeys</item>
+		<item>ListLines</item>
+		<item>ListVars</item>
+		<item>Reload</item>
+		<item>SplashTextOff</item>
+		<item>WinMinimizeAll</item>
+		<item>WinMinimizeAllUndo</item>
+		<item>Shift</item>
+		<item>LShift</item>
+		<item>RShift</item>
+		<item>Alt</item>
+		<item>LAlt</item>
+		<item>RAlt</item>
+		<item>LControl</item>
+		<item>RControl</item>
+		<item>Ctrl</item>
+		<item>LCtrl</item>
+		<item>RCtrl</item>
+		<item>LWin</item>
+		<item>RWin</item>
+		<item>AppsKey</item>
+		<item>AppsKey</item>
+		<item>AltDown</item>
+		<item>AltUp</item>
+		<item>ShiftDown</item>
+		<item>ShiftUp</item>
+		<item>CtrlDown</item>
+		<item>CtrlUp</item>
+		<item>LWinDown</item>
+		<item>LWinUp</item>
+		<item>RWinDown</item>
+		<item>RWinUp</item>
+		<item>RWinUp</item>
+		<item>LButton</item>
+		<item>RButton</item>
+		<item>MButton</item>
+		<item>WheelUp</item>
+		<item>WheelDown</item>
+		<item>WheelLeft</item>
+		<item>WheelRight</item>
+		<item>XButton1</item>
+		<item>XButton2</item>
+		<item>XButton2</item>
+		<item>Joy1</item>
+		<item>Joy2</item>
+		<item>Joy3</item>
+		<item>Joy4</item>
+		<item>Joy5</item>
+		<item>Joy6</item>
+		<item>Joy7</item>
+		<item>Joy8</item>
+		<item>Joy9</item>
+		<item>Joy10</item>
+		<item>Joy11</item>
+		<item>Joy12</item>
+		<item>Joy13</item>
+		<item>Joy14</item>
+		<item>Joy15</item>
+		<item>Joy16</item>
+		<item>Joy17</item>
+		<item>Joy18</item>
+		<item>Joy19</item>
+		<item>Joy20</item>
+		<item>Joy21</item>
+		<item>Joy22</item>
+		<item>Joy23</item>
+		<item>Joy24</item>
+		<item>Joy25</item>
+		<item>Joy26</item>
+		<item>Joy27</item>
+		<item>Joy28</item>
+		<item>Joy29</item>
+		<item>Joy30</item>
+		<item>Joy31</item>
+		<item>Joy32</item>
+		<item>JoyX</item>
+		<item>JoyY</item>
+		<item>JoyZ</item>
+		<item>JoyR</item>
+		<item>JoyU</item>
+		<item>JoyV</item>
+		<item>JoyPOV</item>
+		<item>JoyName</item>
+		<item>JoyButtons</item>
+		<item>JoyAxes</item>
+		<item>JoyInfo</item>
+		<item>JoyInfo</item>
+		<item>Space</item>
+		<item>Tab</item>
+		<item>Enter</item>
+		<item>Escape</item>
+		<item>Esc</item>
+		<item>BackSpace</item>
+		<item>BS</item>
+		<item>Delete</item>
+		<item>Del</item>
+		<item>Insert</item>
+		<item>Ins</item>
+		<item>PGUP</item>
+		<item>PGDN</item>
+		<item>Home</item>
+		<item>End</item>
+		<item>Up</item>
+		<item>Down</item>
+		<item>Left</item>
+		<item>Right</item>
+		<item>Right</item>
+		<item>PrintScreen</item>
+		<item>CtrlBreak</item>
+		<item>ScrollLock</item>
+		<item>CapsLock</item>
+		<item>NumLock</item>
+		<item>NumLock</item>
+		<item>Numpad0</item>
+		<item>Numpad1</item>
+		<item>Numpad2</item>
+		<item>Numpad3</item>
+		<item>Numpad4</item>
+		<item>Numpad5</item>
+		<item>Numpad6</item>
+		<item>Numpad7</item>
+		<item>Numpad8</item>
+		<item>Numpad9</item>
+		<item>NumpadMult</item>
+		<item>NumpadAdd</item>
+		<item>NumpadSub</item>
+		<item>NumpadDiv</item>
+		<item>NumpadDot</item>
+		<item>NumpadDel</item>
+		<item>NumpadIns</item>
+		<item>NumpadClear</item>
+		<item>NumpadUp</item>
+		<item>NumpadDown</item>
+		<item>NumpadLeft</item>
+		<item>NumpadRight</item>
+		<item>NumpadHome</item>
+		<item>NumpadEnd</item>
+		<item>NumpadPgup</item>
+		<item>NumpadPgdn</item>
+		<item>NumpadEnter</item>
+		<item>NumpadEnter</item>
+		<item>F1</item>
+		<item>F2</item>
+		<item>F3</item>
+		<item>F4</item>
+		<item>F5</item>
+		<item>F6</item>
+		<item>F7</item>
+		<item>F8</item>
+		<item>F9</item>
+		<item>F10</item>
+		<item>F11</item>
+		<item>F12</item>
+		<item>F13</item>
+		<item>F14</item>
+		<item>F15</item>
+		<item>F16</item>
+		<item>F17</item>
+		<item>F18</item>
+		<item>F19</item>
+		<item>F20</item>
+		<item>F21</item>
+		<item>F22</item>
+		<item>F23</item>
+		<item>F24</item>
+		<item>F24</item>
+		<item>Browser_Back</item>
+		<item>Browser_Forward</item>
+		<item>Browser_Refresh</item>
+		<item>Browser_Stop</item>
+		<item>Browser_Search</item>
+		<item>Browser_Favorites</item>
+		<item>Browser_Home</item>
+		<item>Volume_Mute</item>
+		<item>Volume_Down</item>
+		<item>Volume_Up</item>
+		<item>Media_Next</item>
+		<item>Media_Prev</item>
+		<item>Media_Stop</item>
+		<item>Media_Play_Pause</item>
+		<item>Launch_Mail</item>
+		<item>Launch_Media</item>
+		<item>Launch_App1</item>
+		<item>Launch_App2</item>
+		<item>Launch_App2</item>
+		<item>Pixel</item>
+		<item>Mouse</item>
+		<item>Screen</item>
+		<item>Relative</item>
+		<item>RGB</item>
+		<item>Join</item>
+		<item>Low</item>
+		<item>BelowNormal</item>
+		<item>Normal</item>
+		<item>AboveNormal</item>
+		<item>High</item>
+		<item>Realtime</item>
+		<item>ahk_id</item>
+		<item>ahk_pid</item>
+		<item>ahk_class</item>
+		<item>ahk_group</item>
+		<item>ahk_group</item>
+		<item>between</item>
+		<item>contains</item>
+		<item>in</item>
+		<item>ss</item>
+		<item>Integer</item>
+		<item>Float</item>
+		<item>IntegerFast</item>
+		<item>FloatFast</item>
+		<item>number</item>
+		<item>digit</item>
+		<item>xdigit</item>
+		<item>alpha</item>
+		<item>upper</item>
+		<item>lower</item>
+		<item>alnum</item>
+		<item>time</item>
+		<item>date</item>
+		<item>date</item>
+		<item>not</item>
+		<item>or</item>
+		<item>and</item>
+		<item>and</item>
+		<item>AlwaysOnTop</item>
+		<item>Topmost</item>
+		<item>Top</item>
+		<item>Bottom</item>
+		<item>Transparent</item>
+		<item>TransColor</item>
+		<item>Redraw</item>
+		<item>Region</item>
+		<item>ID</item>
+		<item>IDLast</item>
+		<item>ProcessName</item>
+		<item>MinMax</item>
+		<item>ControlList</item>
+		<item>Count</item>
+		<item>List</item>
+		<item>Capacity</item>
+		<item>StatusCD</item>
+		<item>Eject</item>
+		<item>Lock</item>
+		<item>Unlock</item>
+		<item>Label</item>
+		<item>FileSystem</item>
+		<item>Label</item>
+		<item>SetLabel</item>
+		<item>Serial</item>
+		<item>Type</item>
+		<item>Status</item>
+		<item>Status</item>
+		<item>static</item>
+		<item>global</item>
+		<item>local</item>
+		<item>ByRef</item>
+		<item>ByRef</item>
+		<item>Seconds</item>
+		<item>Minutes</item>
+		<item>Hours</item>
+		<item>Days</item>
+		<item>Days</item>
+		<item>Read</item>
+		<item>Parse</item>
+		<item>Parse</item>
+		<item>Logoff</item>
+		<item>Close</item>
+		<item>Error</item>
+		<item>Single</item>
+		<item>Single</item>
+		<item>Tray</item>
+		<item>Add</item>
+		<item>Rename</item>
+		<item>Check</item>
+		<item>UnCheck</item>
+		<item>ToggleCheck</item>
+		<item>Enable</item>
+		<item>Disable</item>
+		<item>ToggleEnable</item>
+		<item>Default</item>
+		<item>NoDefault</item>
+		<item>Standard</item>
+		<item>NoStandard</item>
+		<item>Color</item>
+		<item>Delete</item>
+		<item>DeleteAll</item>
+		<item>Icon</item>
+		<item>NoIcon</item>
+		<item>Tip</item>
+		<item>Click</item>
+		<item>Show</item>
+		<item>MainWindow</item>
+		<item>NoMainWindow</item>
+		<item>UseErrorLevel</item>
+		<item>UseErrorLevel</item>
+		<item>Text</item>
+		<item>Picture</item>
+		<item>Pic</item>
+		<item>GroupBox</item>
+		<item>Button</item>
+		<item>Checkbox</item>
+		<item>Radio</item>
+		<item>DropDownList</item>
+		<item>DDL</item>
+		<item>ComboBox</item>
+		<item>ListBox</item>
+		<item>ListView</item>
+		<item>DateTime</item>
+		<item>MonthCal</item>
+		<item>Slider</item>
+		<item>StatusBar</item>
+		<item>Tab</item>
+		<item>Tab2</item>
+		<item>TreeView</item>
+		<item>UpDown</item>
+		<item>UpDown</item>
+		<item>IconSmall</item>
+		<item>Tile</item>
+		<item>Report</item>
+		<item>SortDesc</item>
+		<item>NoSort</item>
+		<item>NoSortHdr</item>
+		<item>Grid</item>
+		<item>Hdr</item>
+		<item>AutoSize</item>
+		<item>Range</item>
+		<item>Range</item>
+		<item>xm</item>
+		<item>ym</item>
+		<item>ys</item>
+		<item>xs</item>
+		<item>xp</item>
+		<item>yp</item>
+		<item>yp</item>
+		<item>Font</item>
+		<item>Resize</item>
+		<item>Owner</item>
+		<item>Submit</item>
+		<item>NoHide</item>
+		<item>Minimize</item>
+		<item>Maximize</item>
+		<item>Restore</item>
+		<item>NoActivate</item>
+		<item>NA</item>
+		<item>Cancel</item>
+		<item>Destroy</item>
+		<item>Center</item>
+		<item>Center</item>
+		<item>Margin</item>
+		<item>MaxSize</item>
+		<item>MinSize</item>
+		<item>OwnDialogs</item>
+		<item>GuiEscape</item>
+		<item>GuiClose</item>
+		<item>GuiSize</item>
+		<item>GuiContextMenu</item>
+		<item>GuiDropFiles</item>
+		<item>GuiDropFiles</item>
+		<item>TabStop</item>
+		<item>Section</item>
+		<item>AltSubmit</item>
+		<item>Wrap</item>
+		<item>HScroll</item>
+		<item>VScroll</item>
+		<item>Border</item>
+		<item>Top</item>
+		<item>Bottom</item>
+		<item>Buttons</item>
+		<item>Expand</item>
+		<item>First</item>
+		<item>ImageList</item>
+		<item>Lines</item>
+		<item>WantCtrlA</item>
+		<item>WantF2</item>
+		<item>Vis</item>
+		<item>VisFirst</item>
+		<item>Number</item>
+		<item>Uppercase</item>
+		<item>Lowercase</item>
+		<item>Limit</item>
+		<item>Password</item>
+		<item>Multi</item>
+		<item>WantReturn</item>
+		<item>Group</item>
+		<item>Background</item>
+		<item>bold</item>
+		<item>italic</item>
+		<item>strike</item>
+		<item>underline</item>
+		<item>norm</item>
+		<item>BackgroundTrans</item>
+		<item>Theme</item>
+		<item>Caption</item>
+		<item>Delimiter</item>
+		<item>MinimizeBox</item>
+		<item>MaximizeBox</item>
+		<item>SysMenu</item>
+		<item>ToolWindow</item>
+		<item>Flash</item>
+		<item>Style</item>
+		<item>ExStyle</item>
+		<item>Check3</item>
+		<item>Checked</item>
+		<item>CheckedGray</item>
+		<item>ReadOnly</item>
+		<item>Password</item>
+		<item>Hidden</item>
+		<item>Left</item>
+		<item>Right</item>
+		<item>Center</item>
+		<item>NoTab</item>
+		<item>Section</item>
+		<item>Move</item>
+		<item>Focus</item>
+		<item>Hide</item>
+		<item>Choose</item>
+		<item>ChooseString</item>
+		<item>Text</item>
+		<item>Pos</item>
+		<item>Enabled</item>
+		<item>Disabled</item>
+		<item>Visible</item>
+		<item>LastFound</item>
+		<item>LastFoundExist</item>
+		<item>LastFoundExist</item>
+		<item>AltTab</item>
+		<item>ShiftAltTab</item>
+		<item>AltTabMenu</item>
+		<item>AltTabAndMenu</item>
+		<item>AltTabMenuDismiss</item>
+		<item>AltTabMenuDismiss</item>
+		<item>NoTimers</item>
+		<item>Interrupt</item>
+		<item>Priority</item>
+		<item>WaitClose</item>
+		<item>Wait</item>
+		<item>Exist</item>
+		<item>Close</item>
+		<item>Close</item>
+		<item>Blind</item>
+		<item>Raw</item>
+		<item>AltDown</item>
+		<item>AltUp</item>
+		<item>ShiftDown</item>
+		<item>ShiftUp</item>
+		<item>CtrlDown</item>
+		<item>CtrlUp</item>
+		<item>LWinDown</item>
+		<item>LWinUp</item>
+		<item>LWinDown</item>
+		<item>RWinUp</item>
+		<item>RWinUp</item>
+		<item>Unicode</item>
+		<item>ToCodePage</item>
+		<item>FromCodePage</item>
+		<item>Deref</item>
+		<item>Pow</item>
+		<item>BitNot</item>
+		<item>BitAnd</item>
+		<item>BitOr</item>
+		<item>BitXOr</item>
+		<item>BitShiftLeft</item>
+		<item>BitShiftRight</item>
+		<item>BitShiftRight</item>
+		<item>Yes</item>
+		<item>No</item>
+		<item>Ok</item>
+		<item>Cancel</item>
+		<item>Abort</item>
+		<item>Retry</item>
+		<item>Ignore</item>
+		<item>TryAgain</item>
+		<item>TryAgain</item>
+		<item>On</item>
+		<item>Off</item>
+		<item>All</item>
+		<item>All</item>
+		<item>HKEY_LOCAL_MACHINE</item>
+		<item>HKEY_USERS</item>
+		<item>HKEY_CURRENT_USER</item>
+		<item>HKEY_CLASSES_ROOT</item>
+		<item>HKEY_CURRENT_CONFIG</item>
+		<item>HKLM</item>
+		<item>HKU</item>
+		<item>HKCU</item>
+		<item>HKCR</item>
+		<item>HKCC</item>
+		<item>HKCC</item>
+		<item>REG_SZ</item>
+		<item>REG_EXPAND_SZ</item>
+		<item>REG_MULTI_SZ</item>
+		<item>REG_DWORD</item>
+		<item>REG_BINARY</item>
+		<item>REG_BINARY</item>
+		<item>UseUnsetLocal</item>
+		<item>UseUnsetGlobal</item>
+		<item>UseEnv</item>
+		<item>LocalSameAsGlobal</item>
+		<item>LocalSameAsGlobal</item>
+		<item>A_AhkPath</item>
+		<item>A_AhkVersion</item>
+		<item>A_AppData</item>
+		<item>A_AppDataCommon</item>
+		<item>A_AutoTrim</item>
+		<item>A_BatchLines</item>
+		<item>A_CaretX</item>
+		<item>A_CaretY</item>
+		<item>A_ComputerName</item>
+		<item>A_ControlDelay</item>
+		<item>A_Cursor</item>
+		<item>A_DD</item>
+		<item>A_DDD</item>
+		<item>A_DDDD</item>
+		<item>A_DefaultMouseSpeed</item>
+		<item>A_Desktop</item>
+		<item>A_DesktopCommon</item>
+		<item>A_DetectHiddenText</item>
+		<item>A_DetectHiddenWindows</item>
+		<item>A_EndChar</item>
+		<item>A_EventInfo</item>
+		<item>A_ExitReason</item>
+		<item>A_FormatFloat</item>
+		<item>A_FormatInteger</item>
+		<item>A_Gui</item>
+		<item>A_GuiEvent</item>
+		<item>A_GuiControl</item>
+		<item>A_GuiControlEvent</item>
+		<item>A_GuiHeight</item>
+		<item>A_GuiWidth</item>
+		<item>A_GuiX</item>
+		<item>A_GuiY</item>
+		<item>A_Hour</item>
+		<item>A_IconFile</item>
+		<item>A_IconHidden</item>
+		<item>A_IconNumber</item>
+		<item>A_IconTip</item>
+		<item>A_Index</item>
+		<item>A_IPAddress1</item>
+		<item>A_IPAddress2</item>
+		<item>A_IPAddress3</item>
+		<item>A_IPAddress4</item>
+		<item>A_IsAdmin</item>
+		<item>A_IsCompiled</item>
+		<item>A_IsCritical</item>
+		<item>A_IsPaused</item>
+		<item>A_IsSuspended</item>
+		<item>A_IsUnicode</item>
+		<item>A_KeyDelay</item>
+		<item>A_Language</item>
+		<item>A_LastError</item>
+		<item>A_LineFile</item>
+		<item>A_LineNumber</item>
+		<item>A_LoopField</item>
+		<item>A_LoopFileAttrib</item>
+		<item>A_LoopFileDir</item>
+		<item>A_LoopFileExt</item>
+		<item>A_LoopFileFullPath</item>
+		<item>A_LoopFileLongPath</item>
+		<item>A_LoopFileName</item>
+		<item>A_LoopFileShortName</item>
+		<item>A_LoopFileShortPath</item>
+		<item>A_LoopFileSize</item>
+		<item>A_LoopFileSizeKB</item>
+		<item>A_LoopFileSizeMB</item>
+		<item>A_LoopFileTimeAccessed</item>
+		<item>A_LoopFileTimeCreated</item>
+		<item>A_LoopFileTimeModified</item>
+		<item>A_LoopReadLine</item>
+		<item>A_LoopRegKey</item>
+		<item>A_LoopRegName</item>
+		<item>A_LoopRegSubkey</item>
+		<item>A_LoopRegTimeModified</item>
+		<item>A_LoopRegType</item>
+		<item>A_MDAY</item>
+		<item>A_Min</item>
+		<item>A_MM</item>
+		<item>A_MMM</item>
+		<item>A_MMMM</item>
+		<item>A_Mon</item>
+		<item>A_MouseDelay</item>
+		<item>A_MSec</item>
+		<item>A_MyDocuments</item>
+		<item>A_Now</item>
+		<item>A_NowUTC</item>
+		<item>A_NumBatchLines</item>
+		<item>A_OSType</item>
+		<item>A_OSVersion</item>
+		<item>A_PriorHotkey</item>
+		<item>A_ProgramFiles</item>
+		<item>A_Programs</item>
+		<item>A_ProgramsCommon</item>
+		<item>A_PtrSize</item>
+		<item>A_ScreenHeight</item>
+		<item>A_ScreenWidth</item>
+		<item>A_ScriptDir</item>
+		<item>A_ScriptFullPath</item>
+		<item>A_ScriptName</item>
+		<item>A_Sec</item>
+		<item>A_Space</item>
+		<item>A_StartMenu</item>
+		<item>A_StartMenuCommon</item>
+		<item>A_Startup</item>
+		<item>A_StartupCommon</item>
+		<item>A_StringCaseSense</item>
+		<item>A_Tab</item>
+		<item>A_Temp</item>
+		<item>A_ThisFunc</item>
+		<item>A_ThisHotkey</item>
+		<item>A_ThisLabel</item>
+		<item>A_ThisMenu</item>
+		<item>A_ThisMenuItem</item>
+		<item>A_ThisMenuItemPos</item>
+		<item>A_TickCount</item>
+		<item>A_TimeIdle</item>
+		<item>A_TimeIdlePhysical</item>
+		<item>A_TimeSincePriorHotkey</item>
+		<item>A_TimeSinceThisHotkey</item>
+		<item>A_TitleMatchMode</item>
+		<item>A_TitleMatchModeSpeed</item>
+		<item>A_UserName</item>
+		<item>A_WDay</item>
+		<item>A_WinDelay</item>
+		<item>A_WinDir</item>
+		<item>A_WorkingDir</item>
+		<item>A_YDay</item>
+		<item>A_YEAR</item>
+		<item>A_YWeek</item>
+		<item>A_YYYY</item>
+		<item>Clipboard</item>
+		<item>ClipboardAll</item>
+		<item>ComSpec</item>
+		<item>ErrorLevel</item>
+		<item>ProgramFiles</item>
+		<item>true</item>
+		<item>false</item>
+		<item>false</item>
+	</Items>
+	<Loop>
+		<Loop>
+			<commands syntax=" [ Key, IncludeSubkeys?, Recurse?]">HKEY_CURRENT_CONFIG</commands>
+			<commands syntax=" [ Key, IncludeSubkeys?, Recurse?]">HKEY_CLASSES_ROOT</commands>
+			<commands syntax=" [ Key, IncludeSubkeys?, Recurse?]">HKEY_CURRENT_USER</commands>
+			<commands syntax=" [ Key, IncludeSubkeys?, Recurse?]">HKEY_USERS</commands>
+			<commands syntax=" [ Key, IncludeSubkeys?, Recurse?]">HKEY_LOCAL_MACHINE</commands>
+			<commands syntax=" [ Delimiters, OmitChars]">Parse</commands>
+			<commands syntax=" [ OutputFile]">Read</commands>
+		</Loop>
+	</Loop>
+	<Gui>
+		<Gui>
+			<command syntax="[ Options, Title]">New</command>
+			<command syntax="[ Options, Text]">Add</command>
+			<command syntax="[ Options, Title]">Show</command>
+			<command syntax="[ NoHide]">Submit</command>
+			<command syntax="[]">Hide</command>
+			<command syntax="[]">Destroy</command>
+			<command syntax="[ Options, FontName]">Font</command>
+			<command syntax="[ WindowColor, ControlColor]">Color</command>
+			<command syntax="[ X, Y]">Margin</command>
+			<command syntax="[ Menuname]">Menu</command>
+			<command syntax="[]">Minimize</command>
+			<command syntax="[]">Maximize</command>
+			<command syntax="[]">Restore</command>
+			<command syntax="[ Off]">Flash</command>
+			<command syntax="[]">Default</command>
+		</Gui>
+	<Add>Text Edit UpDown Picture Button Checkbox Radio DropDownList ComboBox ListBox ListView TreeView Hotkey DateTime MonthCal Slider Progress GroupBox Tab StatusBar ActiveX</Add>
+	</Gui>
+</Commands>

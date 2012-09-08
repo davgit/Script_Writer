@@ -1,0 +1,35 @@
+Scintilla_Add(ParentWindowID, X, Y, W, H){
+	Static ScintillaIndex:=0
+	if !DllCall("GetModuleHandle","str","SciLexer.dll")
+	DllCall("LoadLibrary","str","SciLexer.dll")
+	return DllCall("CreateWindowEx" ,"int",0x200 ,"str","Scintilla"
+	,"str","Scintilla" . ++ScintillaIndex ,"int", 0x52310000
+	,"int",X ,"int",Y ,"int",W ,"int",H ,"uint",ParentWindowID
+	,"uint",0 ,"uint",0 ,"uint",0)
+}
+sc(a,b=0,c=0){
+	s:=var("s"),f:=var("edit_colors")
+	lp:=(b+1)!=""?"Int":"AStr",wp:=(c+1)!=""?"Int":"AStr"
+	if c.astr
+	wp:="astr",c:=c.astr
+	main:=DllCall(s.fn,"Ptr",s.ptr,"UInt",a,lp,b,wp,c,"Cdecl")
+	IfWinactive,Edit Colors
+	{
+		color:=DllCall(f.fn,"Ptr",f.ptr,"UInt",a,lp,b,wp,c,"Cdecl") 
+		main:=main!=""?main:color
+		return color
+	}
+	return main
+}
+string(val*){
+	while,v:=val[A_Index].1
+	sc(v,val[A_Index].2,val[A_Index].3)
+}
+textrange(min,max){
+	VarSetCapacity(text,abs(min-max)),VarSetCapacity(textrange, 12, 0)
+	NumPut(Min,textrange,0,"UInt")
+	NumPut(Max,textrange,4,"UInt")
+	NumPut(&text,textrange,8,"UInt")
+	sc(2162,0,&textrange)
+	return strget(&text,abs(min-max),"cp0")
+}

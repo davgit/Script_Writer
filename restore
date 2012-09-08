@@ -1,0 +1,44 @@
+restore(){
+	Gui,10:Destroy
+	Gui,10:+hwndrestore +Resize
+	hwnd(10,restore),colors(10)
+	Gui,10:Default
+	Gui,Add,listview,x0 y0 w550 h480 altsubmit grestore,Backup
+	Gui,Add,edit,x+0 w480 h480
+	Gui,Add,button,x0 grestorefile,Restore selected file
+	applypos(10,{x:"center",y:"center",w:800,h:600})
+	Gui,10:Show,,Restore
+	file:=ssn(xget("files"),"//*[@sc='" sc(2357) "']/@file").text
+	SplitPath,file,filename,dir
+	loop,% dir "\backup\" filename,1,1
+	{
+		StringSplit,new,A_LoopFileDir,\
+		last:=new0,d:=new%last%
+		lv_add("",d)
+	}
+	LV_Modify(1,"select Focus")
+	Restore:
+	file:=ssn(xget("files"),"//*[@sc='" sc(2357) "']/@file").text
+	SplitPath,file,filename,dir
+	LV_GetText(bdir,LV_GetNext())
+	FileRead,contents,% dir "\backup\" bdir "\" filename
+	ControlSetText,Edit1,%contents%
+	return
+	restorefile:
+	ControlGetText,contents,Edit1
+	Gui,10:Destroy
+	sc(2181,0,contents)
+	return
+	10guiescape:
+	10GuiClose:
+	savepos()
+	gui,10:Destroy
+	return
+	10GuiSize:
+	ControlGetPos,,,,h,Button1,% hwnd("h10")
+	ControlMove,SysListView321,,,,% A_GuiHeight-h
+	ControlGetPos,,y,w,h,SysListView321
+	ControlMove,Button1,,% y+h,%w%
+	ControlMove,Edit1,,,% A_GuiWidth-w,%A_GuiHeight%
+	return
+}

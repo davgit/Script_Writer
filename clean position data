@@ -1,0 +1,12 @@
+clean_position_data(){
+	pos:=xget("positions")
+	nodes:=sn(pos,"/*/*")
+	while,node:=nodes.item[a_index-1]
+	ifnotexist,% ssn(node,"@main").text
+	node.parentNode.removeChild(node),list.=ssn(node,"@main").text "`n"
+	save()
+	if list
+	m("Information for files:`n" list "has been deleted.")
+	else
+	m("All position data is current")
+}

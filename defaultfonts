@@ -1,0 +1,7 @@
+defaultfonts(){
+	xadd("settings","Gui/Fonts/Style6",{Color:0xFF0000,Size:10,Font:"Tahoma",Background:0})
+	xadd("settings","Gui/Fonts/Style7",{Color:0x0000FF,Size:10,Font:"Tahoma",Background:0})
+	xadd("settings","Gui/Fonts/Style8",{Color:0x00FF00,Size:10,Font:"Tahoma",Background:0})
+	xadd("settings","Gui/Fonts/Style32",{Color:0x808000,Size:10,Font:"Tahoma",Background:0})
+	xadd("settings","Gui/Fonts/Style33",{Color:0,Background:0xff0000})
+}

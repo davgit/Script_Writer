@@ -1,0 +1,25 @@
+update(x=""){
+	static script:=[],modified:=[]
+	if x.Delete
+	return modified[x.delete]=0
+	if x.changed
+	modified[x.file]:=1
+	if x.fn
+	return script[x.fn]:=x.contents,modified[x.fn]:=1
+	if x.file
+	return script[x.file]:=x.contents
+	if x.get
+	return script[x.get]
+	if x=get
+	return script
+	if x.modified
+	return out:=[modified,script],modified:=[]
+	file:=ssn(xget("files"),"//*[@sc='" sc(2357) "']/@file")
+	script[file.text]:=gettext()
+	modified[file.text]:=1
+}
+gettext(){
+	VarSetCapacity(text,sc(2182))
+	sc(2182,sc(2182),&text)
+	return strget(&text,length,utf-16),text:=""
+}

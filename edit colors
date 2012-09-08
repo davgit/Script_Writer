@@ -1,0 +1,58 @@
+font(){
+	Gui,9:Destroy
+	Gui,9:+hwndec
+	hwnd(9,ec)
+	Hotkey([9,"RButton","fontstyle"],[9,"Escape","fontclose"])
+	sc:=Scintilla_Add(ec,0,0,600,600)
+	fn1:=DllCall("SendMessageA","UInt",sc,"int",2184,int,0,int,0)
+	ptr1:=DllCall("SendMessageA","UInt",sc,"int",2185,int,0,int,0)
+	f:={fn:fn1,ptr:ptr1},var({edit_colors:f}),var({colors:sc})
+	out=/*`nMulti-Line`ncomments`n*/`nSelect the text to change the colors`nThis is a sample of normal text`n`"incomplete quote`n"complete quote"`n`;comment`n0123456789`n()[]^&*()+~`{`}``b``a``c``k``t``i``c``k`n
+	loop,6
+	out.=keywords(a_index)  "`n"
+	out.="Goto 'Edit/Edit highlight text' to add/edit your own personal highlight list.`n`nRight click to change the style of each font.`n`nLeft click to change the color of a style.`n`nIf you hold down the control key when you click it will change the background color."
+	DllCall(fn1,"Ptr",ptr1,"UInt",2181,"Int","","aStr",out,"Cdecl")
+	DllCall(fn1,"Ptr",ptr1,"UInt",2246,"Int",0,"int",1,"Cdecl")
+	DllCall(fn1,"Ptr",ptr1,"UInt",2069,"Int",0xFFFFFF,"int",0,"Cdecl")
+	Gui,9:Show,w600 h600,Edit Colors
+	DllCall(fn1,"Ptr",ptr1,"UInt",2160,"Int",0,"int",0,"Cdecl")
+	WinGetPos,x,y,w,h,Edit Colors
+	if (w<100 || h<100)
+	WinMove,Edit Colors,,% x,% y,200,200
+	set(),sc(2246,0,1),setcolors()
+	loop,34
+	DllCall(fn1,"Ptr",ptr1,"UInt",2409,"Int",a_index-1,"int",1,"Cdecl")
+	Menu,Default,Add,Restore fonts to default,fontlabel
+	gui,9:menu,Default
+	return
+	87GuiSize:
+	ControlMove,Scintilla1,,,%A_GuiWidth%,%A_GuiHeight%,% var("edit colors")
+	return
+	87guiescape:
+	gui,87:Destroy
+	savepos()
+	return
+	colormenu:
+	name:=clean(a_thismenuitem)
+	if name=syntax_font
+	change_font(38)
+	setcolors()
+	return
+	fontstyle:
+	MouseGetPos,xx,yy,,con
+	ControlGetPos,x,y,w,h,Scintilla1,% hwnd("h9")
+	x:=abs(xx-x),y:=abs(yy-y)
+	if style:=sc(2010,sc(2022,x,y))
+	change_font(style),setcolors()
+	return
+	fontclose:
+	9GuiClose:
+	Gui,9:Destroy
+	return
+	fontlabel:
+	if InStr(A_ThisMenuItem,"restore")
+	MsgBox,4,Reset fonts to default,Are you sure?
+	IfMsgBox,Yes
+	fonts:=xg({settings:"//Fonts"}),fonts.parentnode.removechild(fonts),defaultfonts(),setcolors()
+	return
+}

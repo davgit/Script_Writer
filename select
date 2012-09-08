@@ -1,0 +1,27 @@
+select(win){
+	getpos()
+	f:=xget("files"),main:=xfind(f,,"@file",win)
+	script_tracker(win)
+	if !sci:=ssn(main,"@sc")
+	{
+		sc:=sc(2375)
+		sc(2358,,sc),contents:=update({get:win})
+		sc(2181,,contents),set()
+		main.setattribute("sc",sc)
+		goto selectcon
+	}
+	sc(2358,,sci.text)
+	selectcon:
+	sc(2029,0)
+	tv:=ssn(main,"@TreeView").Text
+	Gui,2:Default
+	TV_Modify(tv,"select Focus"),setpos(),fix_indent()
+	xadd("settings","lastopen",{segment:win})
+	last:=xg({positions:"//*[@main='" ssn(main,"../@main").text "']"})
+	last.setattribute("segment",ssn(main,"../@main").text)
+	WinSetTitle,% hwnd("h1"),,% "Script Writer: " ssn(main,"../@main").text " - " ssn(main,"@name").text
+	ControlSetText,Edit1,% RegExReplace(xg({ideas:"//*[@file='" ssn(main,"../@main").text "']"}).text,"`n","`r`n"),% hwnd("h" 17)
+}
+xfind(xml,path="//*",node="",find=""){
+	return xml.selectsinglenode(path "[" node "='" find "']")
+}

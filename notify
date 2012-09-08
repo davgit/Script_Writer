@@ -1,0 +1,92 @@
+OnWmNotify(wParam,lParam,msg,hwnd){
+	critical
+	control:=numget(lparam+0)
+	sc:=var("sc"),colors:=var("colors")
+	if !(control=sc||control=colors)
+	return
+	code:=NumGet(lParam+8),cpos:=sc(2008)
+	if code=2001
+	if ssn(xget("files"),"//*[@sc='" sc(2357) "']/@file").xml="" && control!=colors
+	return ff()
+	if (code=2008){
+		chr:=sc(2007,cpos-1)
+		SB_SetText("Last Inserted Character Code=" chr,4)
+	}
+	if (code=2001){
+		char:=sc(2007,cpos-1)
+		word:=textrange(sc(2266,cpos,1),sc(2267,cpos,1))
+		keywords:=keywords(99)
+		if (strlen(word)>1&&sc(2102)=0)
+		{
+			keywords:=keywords(SubStr(word,1,1))
+			loop,parse,keywords,%a_space%,%A_Space%
+			if RegExMatch(A_LoopField,"Ai)" word)
+			list.=a_loopfield " "
+			sort,list,UD%A_Space%
+			if list
+			sc(2100,strlen(word),trim(list))
+		}
+		chr:=sc(2007,sc(2008)-1)
+		if chr in 32,40,44
+		{
+			word:=textrange(start:=sc(2266,cpos-1,1),end:=sc(2267,cpos-1,1))
+			if t:=xg({settings:"//replacements/*[@replace='" word "']"}).text
+			sc(2160,start,end),sc(2170,0,t),sc(2160,start+StrLen(t)+1,start+StrLen(t)+1)
+		}
+		if chr=10
+		fix_indent(),sc(2160,sc(2128,sc(2166,sc(2008))),sc(2128,sc(2166,sc(2008))))
+	}
+	if (code=2008)
+	update()
+	if (code=2027){
+		down:=getkeystate("control","P")
+		style:=sc(2010,sc(2008)),value:=down?"Background":"Color"
+		for a,b in {main:style,default:32,edited:5}
+		%a%:=xg({settings:"//Style" b "/@" value}).text
+		color:=main!=""?main:edited?edited:default
+		color:=down?background:color
+		new:=dlg_color(color)
+		if new!=""
+		obj:=down?{Background:new}:{Color:new},xadd("settings","Gui/Fonts/Style" style,obj),setcolors()
+	}
+	if (code=2010){
+		down:=getkeystate("control","P")
+		if control=%colors%
+		{
+			value:=down?"Background":"Color"
+			color:=xg({settings:"//Style33/@" value}).text
+			new:=dlg_color(color)
+			if new!=""
+			obj:=down?{Background:new}:{Color:new},xadd("settings","Gui/Fonts/Style33",obj),setcolors()
+			return
+		}  
+		MouseGetPos,x,y,,con
+		ControlGetPos,xx,yy,,,%con%,% hwnd("h1")
+		x:=abs(xx-x),y:=abs(yy-y)
+		sc(2231,sc(2166,sc(2022,x,y)))
+	}
+	if var("cddl") && code=2022
+	{
+		sc(2003,cpos,",")
+		settimer,nextcontext,1
+		return
+	}
+	if code in 2001 ;,2022
+	SetTimer,con,1
+}
+con(){
+	con:
+	if sc(2102)=0 && xg({settings:"//Context_Sensitive_Help"}).text
+	context()
+	SetTimer,con,Off
+	return
+}
+ff(){
+	m("Please either create a new file, or open an existing one.")
+	return
+	nextcontext:
+	sc(2160,sc(2008)+1,sc(2008)+1)
+	SetTimer,nextcontext,off
+	context()
+	return
+}

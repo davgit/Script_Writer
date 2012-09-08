@@ -1,0 +1,3 @@
+help(){
+	run,http://code.google.com/p/script-writer/
+}

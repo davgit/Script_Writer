@@ -1,0 +1,22 @@
+save(){
+     now:=a_now,list:=[]
+     m:=update({modified:1})
+     for a,b in m.1
+     {
+          StringCaseSense,On
+          fileread,old,%a%
+          if old=% m.2[a]
+          continue
+          StringCaseSense,Off
+          splitpath,a,name,dir
+          backup:=dir "\backup\" now
+          filecreatedir,%backup%
+          filemove,%a%,%backup%\%name%,1
+          contents:=m.2[a]
+          fileappend,%contents%,%a%
+     }
+     getpos(),savepos()
+	save=settings,positions,version,ideas
+	Loop,Parse,save,`,
+	xsave(A_LoopField)
+}

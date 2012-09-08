@@ -1,0 +1,53 @@
+edit_replacements(){
+	static
+	Gui,7:Destroy
+	Gui,7:+hwnder +Owner1
+	hwnd(7,er),colors(7)
+	Gui,7:Default
+	Gui,Add,ListView,w500 h500 -Multi,String|Replacement
+	Gui,Add,Text,Section,String
+	Gui,Add,Edit,ys ver1 w300
+	Gui,Add,Text,xs Section,Replacement
+	Gui,Add,Edit,ver2 ys w300
+	Gui,Add,Button,gera xs Default,Add Replacement
+	Gui,Add,Button,gerd x+10,Remove Selected Replacement
+	Gui,Show,,Edit Replacements
+	erpop:
+	LV_Delete()
+	replacements:=sn(xg({settings:"//replacements"}),"replacement")
+	while,value:=replacements.item[A_Index-1]
+	LV_Add("",ssn(value,"@replace").text,value.text)
+	LV_ModifyCol(1,"AutoHDR")
+	return
+	era:
+	Gui,7:Default
+	Gui,7:Submit,NoHide
+	if xg({settings:"//replacements/*[@replace='" er1 "']"})
+	return m("Already in use")
+	setting:=xg({settings:"//replacements"}),xadd("settings","replacements/replacement",{replace:er1},er2,1)
+	ControlSetText,Edit1
+	ControlSetText,Edit2
+	ControlFocus,Edit1
+	goto erpop
+	return
+	7guiescape:
+	7guiclose:
+	Gui,7:Destroy
+	return
+	erd:
+	Gui,7:Default
+	if !LV_GetNext()
+	return m("Please select a replacement to remove")
+	LV_GetText(out,LV_GetNext())
+	remove:=xg({settings:"//replacements/*[@replace='" out "']"})
+	remove.parentNode.removeChild(remove)
+	goto erpop
+	return
+	7GuiContextMenu:
+	MouseGetPos,x,y,,con
+	if InStr(con,"listview"){
+		Menu,erdel,Add,Delete,erd
+		Menu,erdel,Show
+	}
+	return
+}

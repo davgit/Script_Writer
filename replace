@@ -1,0 +1,8 @@
+replace(x,start){
+	Critical
+	r:=xg({settings:"//replacements/*[@replace='" x "']"})
+	t:=r.text
+	if t
+	sc(2190,start),sc(2192,start+StrLen(x)-1),sc(2194,StrLen(t),t)
+	context()
+}

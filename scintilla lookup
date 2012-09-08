@@ -1,0 +1,41 @@
+scintilla_code_lookup(){
+	static edit
+	Gui,6:Destroy
+	Gui,6:+hwndscl +Owner1
+	hwnd(6,scl),colors(6)
+	Gui,6:Add,Edit,gscle vedit w800
+	Gui,6:Add,ListView,w800 h600,Name|Code|Syntax
+	Gui,6:Add,Button,gscl Default,Add selected to script
+	Gui,6:Add,Button,gscweb x+10,Goto Scintilla Documentation Website
+	Gui,6:Show,,Scintilla Code Lookup
+	gosub,scle
+	return
+	scl:
+	Gui,6:Default
+	LV_GetText(code,LV_GetNext(),2)
+	sc(2003,sc(2008),{astr:code})
+	sc(2160,sc(2008)+StrLen(code),sc(2008)+StrLen(code))
+	return
+	scle:
+	Gui,6:Submit,NoHide
+	Gui,6:Default
+	GuiControl,-Redraw,SysListView321
+	LV_Delete()
+	StringUpper,edit,edit
+	root:=xg({scintilla:"scintilla"})
+	codes:=sn(root,"/*/*[contains(@name,'" edit "')]")
+	while,line:=codes.item[A_Index-1]
+	LV_Add("",line.nodename,ssn(line,"@code").text,ssn(line,"@syntax").text)
+	loop,3
+	LV_ModifyCol(A_Index,"autohdr")
+	LV_Modify(1,"select")
+	GuiControl,+Redraw,SysListView321
+	return
+	scweb:
+	run,http://www.scintilla.org/ScintillaDoc.html
+	return
+	6guiescape:
+	6guiclose:
+	Gui,6:Destroy
+	return
+}

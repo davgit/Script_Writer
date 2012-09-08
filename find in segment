@@ -1,0 +1,33 @@
+find_in_segment(){
+	static
+	window({num:5,title:"Find In Segment",Gui:["Text,Section,Enter text to find","Edit,x+5 w200"
+	,"Radio,xs vnext,Previous","Radio,Checked ,Next","Button,gfis vprevious Default,Search"]
+	,GuiSize:{Edit1:"w"}})
+	Hotkey([5,"up","fissel"],[5,"down","fissel"])
+	return
+	fissel:
+	sel:=A_ThisHotkey="down"?"Next":"Previous"
+	GuiControl,5:,%sel%,1
+	return
+	5GuiEscape:
+	5GuiClose:
+	savepos()
+	Gui,5:Destroy
+	return
+	fis:
+	controlget,previous,checked,,Previous
+	controlgettext,out,Edit1,% hwnd("h5")
+	sc(2190,sc(2008)-previous)
+	if previous
+	sc(2192,sc(0))
+	else
+	sc(2192,sc(2006))
+	start:=sc(2197,strlen(out),{astr:out})
+	if start=-1
+	{
+		msgbox Reached the begining of the selection.
+		return
+	}
+	Sc(2160,start,start+strlen(out))
+	return
+}

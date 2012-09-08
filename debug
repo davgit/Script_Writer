@@ -1,0 +1,71 @@
+;segalion http://www.autohotkey.com/community/viewtopic.php?f=2&t=16823&start=105
+class cli{
+	__New(sCmd, sDir="")
+	{
+		DllCall("CreatePipe","Ptr*",hStdInRd,"Ptr*",hStdInWr,"Uint",0,"Uint",0)
+		DllCall("CreatePipe","Ptr*",hStdOutRd,"Ptr*",hStdOutWr,"Uint",0,"Uint",0)
+		DllCall("SetHandleInformation","Ptr",hStdInRd,"Uint",1,"Uint",1)
+		DllCall("SetHandleInformation","Ptr",hStdOutWr,"Uint",1,"Uint",1)
+		l:=A_PtrSize=4?[16,68,44,56,60,64]:[24,96,60,80,88,96]
+		VarSetCapacity(pi,l.1,0)
+		sisize:=VarSetCapacity(si,l.2,0)
+		NumPut(sisize,si,0,"UInt"),NumPut(0x100,si,l.3,"UInt"),NumPut(hStdInRd,si,l.4,"Ptr"),NumPut(hStdOutWr,si,l.5,"Ptr"),NumPut(hStdOutWr,si,l.6,"Ptr")
+		DllCall("CreateProcess", "Uint", 0, "Ptr", &sCmd, "Uint", 0, "Uint", 0, "Int", True, "Uint", 0x08000000, "Uint", 0, "Ptr", sDir ? &sDir : 0, "Ptr", &si, "Ptr", &pi)
+		DllCall("WriteFile","UPtr",foo,"Str",Script,"UInt",StrLen(Script) << !!A_IsUnicode,"UPtr",0,"UPtr",0)
+		DllCall("CloseHandle","Ptr",NumGet(pi,0))
+		DllCall("CloseHandle","Ptr",NumGet(pi,A_PtrSize))
+		DllCall("CloseHandle","Ptr",hStdOutWr)
+		DllCall("CloseHandle","Ptr",hStdInRd)
+		this.hStdInWr:= hStdInWr, this.hStdOutRd:= hStdOutRd
+	}
+	close(){
+		hStdInWr:=this.hStdInWr
+		hStdOutRd:=this.hStdOutRd
+		DllCall("CloseHandle","Ptr",hStdInWr)
+		DllCall("CloseHandle","Ptr",hStdOutRd)
+	}
+	stdout(chars="",codepage="") {
+		hStdOutRd:=this.hStdOutRd
+		if (codepage="")
+		codepage:=A_FileEncoding
+		fout:=FileOpen(hStdOutRd, "h", codepage)
+		if (IsObject(fout) and fout.AtEOF=0)
+		return fout.Read()
+		return ""
+	}
+}
+rundebug(){
+	static netsh
+	save()
+	file:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text
+	if file=%A_ScriptFullPath%
+	{
+		Reload
+		ExitApp
+	}
+	FileEncoding,CP850
+	netsh.close()
+	SplitPath,file,fn,dir
+	file="%file%"
+	netsh:= new cli(a_ahkpath " /ErrorStdOut " file,dir)
+	loop,20
+	{
+		sleep,20
+		debug:=netsh.stdout()
+		if debug
+		break
+	}
+	if !debug
+	return
+	RegExMatch(debug,"Ui)(.*) \(",file),RegExMatch(debug,"U)\((.*)\)",line)
+	RegExMatch(debug,"i)Specifically:(.*)",out)
+	out:=substr(out,15),select(file1),sc:=var(1)
+	sc(2024,line1-1)
+	sc(2190,sc(2008)),sc(2192,sc(2006))
+	start:=sc(2197,strlen(out),out)
+	if out1
+	Sc(2160,start,start+strlen(out))
+	else
+	sc(2160,sc(2128,line1-1),sc(2136,line1-1))
+	sc(2200,sc(2008),debug)
+}

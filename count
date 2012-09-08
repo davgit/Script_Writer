@@ -1,0 +1,6 @@
+character_count(){
+	if sc(2161)>1
+	msgbox % sc(2161)-1
+	else
+	MsgBox % sc(2183)
+}

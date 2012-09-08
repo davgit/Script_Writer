@@ -1,0 +1,59 @@
+autoopen(onlyif=""){
+	settings:=xget("settings"),last:=ssn(settings,"//lastopen/file").text,files:=xml("files")
+	files:=files.xml
+	mf:=files.selectsinglenode("//files"),last:=file?file:last
+	Gui,2:Default
+	allfiles:=sn(settings,"//lastopen/*")
+	while,openfile:=allfiles.item[a_index-1].text
+	{
+		if (onlyif && openfile!=onlyif)
+		continue
+		SplitPath,openfile,File,maindir
+		fn:=openfile
+		FileRead,contents,%openfile%
+		root:=TV_Add(file),update({file:fn,contents:contents})
+		xml:=files.createelement("main"),mf.appendchild(xml)
+		xml.setattribute("main",fn)
+		xml1:=files.createelement("mainfile"),xml.appendchild(xml1)
+		StringLower,ffn,file
+		for a,b in {file:fn,TreeView:root,name:ffn}
+		xml1.setattribute(a,b)
+		Menu,s,add,% sn(files,"//main").length " " openfile,jumpfile
+		Loop,Parse,contents,`n,`r`n
+		{
+			if InStr(a_loopfield,chr(35) "include"){
+				file:=trim(a_loopfield)
+				stringreplace,file,file,`,,%a_space%,All
+				inc:=substr(a_loopfield,10),inc:=InStr(inc,"*i ")?SubStr(inc,4):inc
+				SplitPath,inc,file,dir
+				if InStr(inc,".."){
+					stringreplace,inc,inc,/,\,all
+					RegExReplace(inc,"\.\.\\","",count),newdir:=""
+					nmd:=SubStr(maindir,1,InStr(maindir,"\",0,0,count)-1)
+					Loop,Parse,inc,\
+					if a_loopfield!=..
+					newdir.="\" a_loopfield
+					inc:=nmd newdir
+				}
+				SplitPath,inc,file,dir
+				StringLower,ffn,file
+				inc:=!dir?maindir "\" inc:inc
+				child:=TV_Add(file,root)
+				fff:=FileOpen(A_ScriptFullPath,"r")
+				FileRead,contents,%inc%
+				xml1:=files.createelement("file"),xml.appendchild(xml1)
+				for a,b in {file:inc,TreeView:child,name:ffn}
+				xml1.setattribute(a,b)
+				update({file:inc,contents:contents})
+			}
+		}
+	}
+	menu,bar,add,&Scripts,:s
+	return
+	jumpfile:
+	file:=RegExReplace(A_ThisMenuItem,"U)(.* )","","",1)
+	ls:=xg({positions:"//*[@main='" file "']/@segment"}).text
+	ls:=ls?ls:file
+	select(ls),coderefresh()
+	return
+}

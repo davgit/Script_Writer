@@ -1,0 +1,34 @@
+show_functions(){
+	file:=xg({files:"//*[@sc='" sc(2357) "'].."})
+	main:=ssn(file,"@main").Text
+	loop:=sn(file,"*")
+	while,out:=ssn(loop.item[a_index-1],"@file"){
+		code:=update({get:out.text})
+		pos:=1
+		while,pos:=RegExMatch(code,"OU)(.*)\(.*\).*{(.*)",fun,pos),pos:=pos+StrLen(fun.value(0)){
+			if RegExMatch(ltrim(fun.value(1)),"[^a-zA-Z0-9_,]")
+			continue
+			if !fun.value(1)
+			continue
+			val:=Trim(RegExReplace(SubStr(fun.value(0),1,-1)," "))
+			list.=val " "
+		}
+	}
+	list:=trim(list)
+	sort,list,UD%A_Space%
+	sf:
+	cpos:=sc(2008),word:=textrange(sc(2266,cpos,1),sc(2267,cpos,1))
+	sc(2100,StrLen(word),list)
+	while,sc(2102){
+		input,out,L1,{backspace}{Up}{Down}
+		x:=ErrorLevel
+		send,%out%
+		if errorlevel = endkey:backspace
+		{
+			send,{BS}
+			goto sf
+		}
+		key:=RegExReplace(x,"(EndKey:)")
+		send,{%key%}
+	}
+}

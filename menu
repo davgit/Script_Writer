@@ -1,0 +1,67 @@
+menu(){
+	Menu,o,UseErrorLevel,On
+	menu:=constants("menu")
+	xml:=xget("settings")
+	if !ssn(xml,"//quick_settings")
+	for a in menu{
+		item:=clean(menu[a].item)
+		if menu[a].menu="o"{
+			if item not in end_of_line,debug,settings
+			s=1
+			else
+			s=0
+			xadd("settings","quick_settings/" item b,0,s)
+		}
+	}
+	for a in Menu{
+		menu,% menu[a].menu,add,% menu[a].item,menu
+		item:=clean(menu[a].item)
+		if ssn(xml,"//quick_settings/" item).Text{
+			%item%()
+			Menu,% menu[a].menu,ToggleCheck,% menu[a].item
+		}
+		if IsFunc(item)=0
+		if menu[a].menu!="o"
+		Menu,% menu[a].menu,Disable,% menu[a].item
+	}
+	menu,bar,add,&File,:f
+	menu,bar,add,&Edit,:e
+	menu,bar,add,&About,:a
+	menu,bar,add,&Options,:o
+	menu,bar,add,&Window,:w
+	gui,1:menu,bar
+	return
+	menu:
+	m:=clean(A_ThisMenuItem)
+	if (A_ThisMenu="o" && m="settings")
+	return settings()
+	if A_ThisMenu=o
+	toggle(m,A_ThisMenuItem)
+	%m%()
+	return
+}
+clean(x,y=0){
+	if y=1
+	return regexreplace(x,"i)(?:[^a-z0-9 ]|\&)","")
+	return regexreplace(regexreplace(x,"i)(?:[^a-z0-9 ]|\&)","")," ","_")
+}
+toggle(m,i){
+	setting:=ssn(xget("settings"),"//" m)
+	if !setting
+	xadd("settings","quick_settings/" m,m)
+	s:=setting.text=1?0:1
+	setting.text:=s
+	Menu,o,ToggleCheck,%i%
+	if IsFunc(m)
+	%m%()
+}
+word_wrap(){
+	sc(2268,ssn(xget("settings"),"//Word_Wrap").Text)
+}
+Simple_Brace(){
+	if !A_ThisLabel
+	return
+	setting:=ssn(a:=xget("settings"),"//" A_ThisFunc)
+	Menu,o,ToggleCheck,Create &Matching Brace
+	ssn(a,"//Create_Matching_Brace").text:=s:=setting.text=1?0:1
+}

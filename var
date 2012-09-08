@@ -1,0 +1,16 @@
+var(x=""){
+	static
+	static list:=[]
+	if !IsObject(x)
+	return list[x]
+	for a,b in x
+	list[a]:=b
+}
+title(x=""){
+	static
+	static title:=[]
+	if !IsObject(x)
+	return title[x]
+	for a,b in x
+	title[x.Number,a]:=b
+}

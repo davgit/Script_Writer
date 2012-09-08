@@ -1,0 +1,50 @@
+coderefresh(){
+	WinGet,style,style,% hwnd("h3")
+	if !(style&0x10000000)
+	return
+	Gui,3:Default
+	GuiControl,-Redraw,SysTreeView321
+	TV_Delete()
+	file:=xg({files:"//*[@sc='" sc(2357) "'].."})
+	loop:=sn(file,"*")
+	functions:=TV_Add("Functions"),labels:=TV_Add("Labels"),hotkeys:=TV_Add("Hotkeys"),class:=TV_Add("Class")
+	while,out:=ssn(loop.item[a_index-1],"@file"){
+		code:=update({get:out.text})
+		pos:=1
+		for a,b in {functions:"OU)(.*)\(.*\).*{(`r)",labels:"OU)(.*):(`r)",hotkeys:"OU)(.*)::(`r)",class:"OUi)(.*)class(.*){"}{
+			pos:=1
+			regex:=a="class"?"[^a-zA-Z0-9_ ]":"[^a-zA-Z0-9_]"
+			RegEx:=a="Hotkeys"?"[[:space:]]":regex
+			while,pos:=RegExMatch(code,b,fun,pos)
+			if RegExMatch(ltrim(fun.value(1)),regex),pos:=fun.pos(2)
+			continue
+			else
+			v:=a="class"?2:1,temp:=TV_Add(trim(fun.value(v)),%a%),TV_Add(fun.pos(v)-1,temp),TV_Add(out.text,temp)
+		}
+	}
+	GuiControl,+Redraw,SysTreeView321
+}
+codeclick(){
+	gocode:
+	if A_GuiEvent!=Normal
+	return
+	Gui,3:Default
+	if !TV_GetParent(TV_GetSelection())
+	return
+	if !TV_GetChild(TV_GetSelection())
+	return
+	TV_GetText(parent,TV_GetParent(TV_GetSelection()))
+	TV_GetText(text,TV_GetSelection())
+	child:=TV_GetText(pos,TV_GetChild(TV_GetSelection()))
+	TV_GetText(file,TV_GetNext(child))
+	p:=parent="labels"?1:0
+	select(file)
+	sc(2190,pos)
+	sc(2192,sc(2006))
+	start:=sc(2197,strlen(text),{astr:text})
+	sc(2160,start,start+strlen(text)+p)
+	return
+}
+refresh_code_explorer(){
+	coderefresh()
+}

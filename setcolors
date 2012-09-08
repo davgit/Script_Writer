@@ -1,0 +1,53 @@
+setcolors(color=""){
+	set:=xget("settings"),Default:=[],nodes:=sn(set,"//Fonts/*"),list:={Font:2056,Size:2055,Color:2051,Background:2052,Bold:2053,Italic:2054,Underline:2059}
+	def:=xg({settings:"//Style5"})?5:32
+	for a,b in list{
+		if !val:=ssn(set,"//Style" def "/@" a).text
+		val:=ssn(set,"//Style32/@" a).Text
+		val:=val?val:0
+		sc(b,32,val),Default[a]:=val
+	}
+	string([2069,0xffffff],[2050],[2242,0,35],[2055,32,10])
+	while,fnt:=nodes.item[count:=A_Index-1]
+	for a,b in list{
+		value:=ssn(nodes.item[count],"@" a).text
+		if value || value=0
+		{
+			number:=substr(nodes.item[count].nodename,6)
+			sc(b,number,value)
+			if (number=33 && a="Background")
+			sc(2290,1,value),sc(2291,1,value)
+		}
+	}
+	var({Default:Default}),colors()
+}
+colors(Number=""){
+	for a,b in var("Default")
+	%a%:=b
+	for a,b in {bold:bold,italic:italic,underline:underline}
+	style.=b?a " ":""
+	win:=var("hwnd"),style:="s" size " " style,Background:=rgb(Background)
+	if number
+	win:=[],win[number]:=hwnd(number)
+	for a,b in Win
+	{
+		if !(a+1)
+		continue
+		Gui,%a%:Default
+		Gui,%a%:font
+		gui,%a%:font,% style " c" RGB(Color),%font%
+		gui,%a%:color,%background%,%background%
+		winget,controllist,controllisthwnd,% "ahk_id " b
+		loop,Parse,ControlList,`n
+		{
+			guicontrol,+background%background%,%A_LoopField%
+			guicontrol,font,%A_LoopField%
+		}
+	}
+}
+rgb(c){
+	setformat,IntegerFast,H
+	c:=(c&255)<<16 | (c&65280) | (c>>16),c:=SubStr(c,1)
+	SetFormat, integerfast,D
+	return c
+}

@@ -1,0 +1,75 @@
+replace_text(){
+	window({num:16,title:"Replace Text",Gui:["Text,Section,Text to find:","Edit,vfind x+10","Text,xs Section,Text to replace:","Edit,x+10 vreplace"
+	,"Radio,vall xs Checked,Search in all segments","Radio,vcurrent,Search in current segment","Radio,vselected,Search in selected text","Button,grt Default,Replace"]
+	,GuiSize:{Edit1:"w",Edit2:"w"}})
+	return
+	rt:
+	all:=window(16)
+	if !(all.find)
+	return m("A search value is required")
+	if (all.All)
+	replace_text_(all.find,all.replace,1)
+	if all.current
+	replace_text_(all.find,all.replace,xg({files:"//*[@sc='" sc(2357) "']"}))
+	if all.selected
+	goto rselected
+	return
+	16GuiClose:
+	16GuiEscape:
+	savepos()
+	Gui,16:Destroy
+	return
+	rselected:
+	pos:=posinfo(),min:=pos.start,max:=pos.end,found:=min,find:=all.find,replace:=all.replace
+	while,found<max{
+		sc(2190,found),sc(2192,max),start:=sc(2197,strlen(find),find),sc(2160,start,start+strlen(find))
+		if start=-1
+		{
+			found=0
+			break
+		}
+		msgbox,35,Text Found.,Replace this occurence,0
+		ifmsgbox,yes
+		sc(2170,,replace),update()
+		ifmsgbox,cancel
+		exit
+		found:=sc(2008)+1
+	}
+	return
+}
+replace_text_(find,replace,where){
+	root:=xg({files:"//*[@sc='" sc(2357) "'].."})
+	files:=sn(root,"*/@file"),found=0
+	if IsObject(where)
+	files:=sn(where,"@file"),found=0
+	while,file:=files.item[A_Index-1].Text
+	if InStr(update({get:file}),find){
+		loop,
+		{
+			select(file)
+			sc(2190,found)
+			sc(2192,sc(2006))
+			start:=sc(2197,strlen(find),find)
+			sc(2160,start,start+strlen(find))
+			if start=-1
+			{
+				found=0
+				break
+			}
+			msgbox,35,Text Found.,Replace this occurence,0
+			controlfocus,Scintilla1,% var("script writer")
+			ifmsgbox,yes
+			{
+				sc(2170,,replace)
+				update()
+			}
+			ifmsgbox,cancel
+			{
+				Gui,77:Hide
+				exit
+			}
+			found:=sc(2008)+1
+		}
+	}
+	m("No more occurances of " find " were found in the search parameters")
+}

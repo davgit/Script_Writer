@@ -1,0 +1,32 @@
+brace:
+brace()
+return
+brace(){
+	for a,b  in posinfo()
+	%a%:=b
+	if (start!=end){
+		sc(2003,start,"{"),sc(2003,end+1,"}"),sc(2160,b:=end+2,b)
+		fix_indent()
+		return
+	}
+	brace:=xg({settings:"//Simple_Brace"}).text?"}":""
+	if (start=end && ind=lineend){
+		sc(2003,sc(2008),"{`r`n`r`n}"),fix_indent()
+		send,{down}^{right}
+	}
+	else
+	sc(2003,sc(2008),"{" brace),sc(2160,sc(2008)+1,sc(2008)+1)
+	fix_indent()
+}
+paren:
+paren()
+return
+paren(){
+	paren:=xg({settings:"//Smart_Parentheses"}).text?")":""
+	sc(2003,sc(2008),"(" paren),sc(2160,sc(2008)+1,sc(2008)+1)
+	return
+	closebrace:
+	sc(2003,sc(2008),"}"),sc(2160,b:=sc(2008)+1,b)
+	fix_indent()
+	return
+}

@@ -1,0 +1,32 @@
+close(){
+	gui,2:default
+	save()
+	xml:=xget("files")
+	main:=xfind(xml,,"@sc",sc(2357)),current:=ssn(main,"../@main").text
+	list:=sn(main,"../*")
+	open:=xg({settings:"//lastopen"})
+	left:=sn(open,"file")
+	while,f:=left.item[A_Index-1].Text
+	Menu,s,Delete,% A_Index " " f
+	remove:=xg({settings:"//lastopen/file[text()='" current "']"})
+	remove.parentNode.removeChild(remove)
+	;menu,s,delete,% sn(xget("files"),"//main").length " " current
+	list:=sn(main,"../*")
+	while,node:=list.item[a_index-1]
+	for a,b in ["sc","TreeView"]{
+		%b%:=ssn(node,"@" b).text
+		if sc
+		sc(2377,,sc),sc:=""
+		if treeview
+		tv_delete(treeview)
+	}
+	open:=xg({settings:"//lastopen"})
+	left:=sn(open,"file")
+	while,f:=left.item[A_Index-1].Text
+	Menu,s,Add,% A_Index " " f,jumpfile
+	remove:=ssn(main,"..")
+	remove.parentnode.removechild(remove)
+	file:=xg({settings:"//lastopen/file"}).text
+	select(xg({positions:"//*[@main='" file "']/@segment"}).text)
+	setpos()
+}

@@ -1,0 +1,54 @@
+variables(){
+	WinGet,style,style,% hwnd("h11")
+	switch:=!(style&0x10000000)?"+":"-"
+	if switch=+
+	Gui,11:Show
+	else
+	Gui,11:Hide
+	savepos()
+}
+vwin(){
+	window({num:11,title:"Custom Variables",gui:["ListView,w200 h400,Variables"
+	,"Edit,w200"
+	,"Button,w200 gvaradd Default,Add Variable"]
+	,GuiSize:{SysListView321:"wh",Edit1:"wy",Button1:"wy"}})
+	nodes:=sn(xget("settings"),"//Variables/*")
+	while,var:=nodes.item[A_Index-1]
+	LV_Add("",var.Text)
+	return
+	11GuiClose:
+	11GuiEscape:
+	Gui,11:Hide
+	savepos()
+	return
+	varadd:
+	Gui,11:Default
+	ControlGetText,new,Edit1,% hwnd("h11")
+	Loop,% LV_GetCount()
+	{
+		LV_GetText(var,A_Index)
+		if new=%var%
+		{
+			ControlSetText,Edit1
+			return
+		}
+	}
+	LV_Add("",new)
+	xadd("settings","Variables/Variable",new,,1)
+	ControlSetText,Edit1
+	xsave("settings")
+	keywords(98)
+	return
+	vardel:
+	Gui,11:Default
+	next:=0,list:="",list:=[]
+	while,next:=LV_GetNext(1)
+	LV_GetText(a,next),var:=xg({settings:"//Variables/*[text()='" a "']"}),var.parentnode.removechild(var),list[next]:=1,LV_Delete(next)
+	keywords(98)
+	WinSet,Redraw,,% hwnd("h11")
+	return
+	11GuiContextMenu:
+	Menu,del,Add,Delete?,vardel
+	Menu,del,Show
+	return
+}

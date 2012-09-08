@@ -1,0 +1,33 @@
+publish(x=""){
+	save()
+	main:=ssn(xget("files"),"//*[@sc='" sc(2357) "']../@main")
+	root:=main.text
+	SplitPath,root,mainfile,maindir
+	Loop,Read,%root%
+	{
+		if InStr(A_LoopReadLine,"#Include"){
+			inc:=substr(A_LoopReadLine,10),inc:=InStr(inc,"*i ")?SubStr(inc,4):inc
+			SplitPath,inc,file,dir
+			if InStr(inc,".."){
+				RegExReplace(inc,"\.\.\\","",count),newdir:=""
+				nmd:=SubStr(maindir,1,InStr(maindir,"\",0,0,count)-1)
+				Loop,Parse,inc,\
+				if A_LoopField!=..
+				newdir.="\" A_LoopField
+				inc:=nmd newdir
+			}
+			else
+			inc:=maindir "\" inc
+			contents.=update({get:inc}) "`r`n"
+		}
+		else
+		mainfilecon.=A_LoopReadLine "`r`n"
+	}
+	total:=mainfilecon "`r`n" contents
+	version:=xg({version:"//*[@file='" main.text "']/@version"}).text
+	StringReplace,total,total,% chr(59) "auto_version",Version=%version%
+	if x
+	return total
+	Clipboard:=total
+	MsgBox,,,Project coppied to your clipboard,1
+}

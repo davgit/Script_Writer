@@ -1,0 +1,57 @@
+import(){
+	{
+		MsgBox,This process does not always work on every script.  ;Please open it normally and use Create Segment from Selection if it does not.
+		FileSelectFile,file,,,Select a file to import,*.ahk
+		if ErrorLevel
+		return
+		SplitPath,file,,,,noext
+		name:=noext
+		IfExist,project\%noext%
+		msgbox,3,Project Already Exists,Delete?`nYes: Delete and create a new project`nNo: Rename project`nCancel: Abort
+		IfMsgBox,Yes
+		FileRemoveDir,project\%noext%,1
+		IfMsgBox,No
+		FileMoveDir,project\%noext%,project\%noext%-%a_now%,1
+		IfMsgBox,Cancel
+		return
+	}
+	fileread,script,%file%
+	loop,parse,script,`n,`r
+	{
+		if (RegExMatch(A_LoopField,"(.*\(.*\).*{)",fun) && substr(a_loopfield,0)="{")
+		start=1
+		if !start
+		everything.=a_loopfield "`n"
+		if start
+		{
+			stringsplit,out,a_loopfield,;
+			out:=trim(out1)
+			if SubStr(out,0) = "{"
+			indent++
+			if out = `}
+			indent--
+			program.=a_loopfield "`n"
+			if indent=0
+			{
+				prognum++
+				final%prognum%:=program
+				program=
+				start=
+			}
+		}
+	}
+	dir=%A_ScriptDir%\project\%name%
+	fileremovedir,%dir%,1
+	filecreatedir,%dir%
+	loop,%prognum%
+	fileappend,% trim(final%a_index%,"`r`n"),% dir "\" substr(final%a_index%,1,instr(final%a_index%,"(")-1)
+	loop,%dir%\*.
+	list.=a_loopfilename ","
+	fileappend,%everything%,%dir%\%name%
+	include:=chr(35) "include"
+	fileappend,%include% %name%`n,%dir%\%name%.ahk
+	loop,parse,list,`,
+	if a_loopfield
+	fileappend,%include% %a_loopfield%`n,%dir%\%name%.ahk
+	open(dir "\" name ".ahk")
+}

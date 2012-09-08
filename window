@@ -1,0 +1,52 @@
+window(win){
+	static
+	static variable_list:=[]
+	if !IsObject(win){
+		new_list:=[]
+		Gui,%win%:Submit,NoHide
+		for a,b in variable_list[win]
+		new_list[a]:=%a%
+		return new_list
+	}
+	for a,b in Win
+	%a%:=b
+	Gui,%num%:Destroy
+	Gui,%num%:+hwndhwnd +owner1 +Resize
+	hwnd(num,hwnd),colors(num)
+	Gui,%num%:Default
+	for a,b in Gui
+	{
+		StringSplit,con,b,`,
+		if (con1="Tab" && con2="")
+		{
+			Gui,Tab
+			continue
+		}
+		Gui,Add,%con1%,%con2%,%con3%
+		RegExMatch(con2,"Ui)\bv(.*)\b",var)
+		if var1
+		variable_list[num,var1]:=var1
+		con1:=con2:=con3:=""
+	}
+	controls:=[]
+	Gui,%num%:Show,Hide
+	getwinpos(xx,yy,ww,hh,hwnd)
+	list:=getallpos(hwnd)
+	pos:=var("pos")
+	for a,b in GuiSize
+	loop,parse,b
+	{
+		if A_LoopField in x,w
+		coord:=A_LoopField="x"?ww+pos.border+pos.border:ww
+		if A_LoopField in y,h
+		coord:=A_LoopField="y"?hh+pos.caption+pos.border:hh
+		controls[hwnd,a,A_LoopField]:=abs(coord-list[a,A_LoopField])
+	}
+	var({offsets:controls}),shapeset(num,guisize,hwnd,title),applypos(num,posdata)
+	style:=xg({settings:"//*[@window='" num "']/@style"}).text
+	if !Style
+	WinShow,% hwnd("h" num)
+	hide:=(style&0x10000000)?1:0
+	if Hide
+	WinActivate,% hwnd("h" num)
+}

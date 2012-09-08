@@ -1,0 +1,61 @@
+Hotkey(key*){
+	for a,b in key
+	{
+		Hotkey,IfWinActive,% hwnd("h" b.1)
+		if b.4
+		Hotkey,% b.2,% b.3,Off
+		else
+		Hotkey,% b.2,% b.3,On
+	}
+}
+Hotkeys(x){
+	if x=1
+	{
+		for a,b in constants("hotkeys")
+		if key:=xg({settings:"//" clean(a)}).text
+		Hotkey([1,key,"hotkeys"])
+	}
+	if x=0
+	for a,b in constants("hotkeys"){
+		Hotkey,IfWinActive,% hwnd("h1")
+		if key:=xg({settings:"//" clean(a)}).text
+		{
+			Hotkey,%key%,hotkeys,Off
+		}
+	} 
+	return
+	hotkeys:
+	fun:=xg({settings:"//Hotkeys/*[text()='" A_ThisHotkey "']"}).nodename
+	%fun%()
+	return
+}
+hotkeymenu(){
+	Menu,bar,Delete,&Hotkey Actions
+	Menu,hot,DeleteAll
+	Menu,hot,Add,&Settings`t,hotkeymenu
+	for a,b in constants("hotkeys"){
+		if !IsFunc(clean(a))
+		continue
+		hotkeytotal:=""
+		if a=headerval
+		continue
+		hotkey:=thiskey:=xg({settings:"//Hotkeys/" clean(a)}).text
+		Loop,parse,Hotkey
+		{
+			hotkeytotal.=A_LoopField="!"?"Alt+":""
+			hotkeytotal.=A_LoopField="^"?"Ctrl+":""
+			hotkeytotal.=A_LoopField="+"?"Shift+":""
+			StringUpper,letter,A_LoopField
+			if letter not in !,^,+
+			hotkeytotal.=letter
+		}
+		Menu,Hot,Add,%a%`t%hotkeytotal%,hotkeymenu
+	}
+	Menu,bar,Add,&Hotkey Actions,:Hot
+	return
+	hotkeymenu:
+	key:=SubStr(A_ThisMenuItem,1,InStr(A_ThisMenuItem,"`t")-1)
+	key:=clean(key)
+	%key%()
+	return
+}

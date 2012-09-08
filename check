@@ -1,0 +1,30 @@
+check(){
+	root:=sn(xg({files:"//*[@sc='" sc(2357) "'].."}),"*/@file")
+	TV_Delete()
+	info:=window(12),find:=info.find,sort:=info.sort
+	if !find
+	return
+	GuiControl,-Redraw,SysTreeView321
+	while,file:=root.item[a_index-1].nodevalue,out:=update({get:file})
+	if InStr(out,find){
+		found:=file
+		if sort
+		cat:=TV_Add(found)
+		loop {
+			stringgetpos,pos,out,%find%,L%a_index%
+			if pos=-1
+			break
+			text:=substr(out,1,instr(out,"`r",0,(pos+1))-1)
+			text:=substr(text,instr(text,"`r",0,0)+1)
+			if !sort
+			f%a_index%:=TV_Add(text)
+			else
+			f%a_index%:=TV_Add(text,cat)
+			TV_Add((pos), f%a_index%)
+			TV_Add(file, f%a_index%)
+		}
+	}
+	if TV_GetCount()
+	controlfocus,SysTreeView321,% hwnd("h4")
+	GuiControl,+Redraw,SysTreeView321
+}

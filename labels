@@ -1,0 +1,12 @@
+reload(){
+	Reload
+}
+cut(){
+	sc(2177)
+}
+copy(){
+	sc(2178)
+}
+pastectrl_v(){
+	sc(2179)
+}

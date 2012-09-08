@@ -1,0 +1,74 @@
+gui(){
+	DetectHiddenWindows,On
+	Gui,Add,StatusBar,hwndstatus,Stuff here
+	SB_SetParts(300,300,300)
+	ControlGetPos,,,,h,,ahk_id %status%
+	SysGet,border,32
+	SysGet,caption,4
+	SysGet,men,55
+	pos:={border:border,caption:caption,status:h,ymin:caption+Border,menu:men+1}
+	var({pos:pos})
+	Gui,+Resize +hwndmain
+	Gui,Show,w0 h0 Hide
+	sc:=Scintilla_Add(main,0,0,100,100),var({sc:sc})
+	fn1:=DllCall("SendMessageA","UInt",sc,"int",2184,int,0,int,0)
+	ptr1:=DllCall("SendMessageA","UInt",sc,"int",2185,int,0,int,0)
+	s:={fn:fn1,ptr:ptr1}
+	var({s:s})
+	Gui,2:+Resize +parent1 -0x30000 +hwndexplorer
+	Gui,2:Add,TreeView,x0 y0 AltSubmit gfe
+	Gui,2:Show,x0 y0 w140,File Explorer
+	Gui,3:+Resize +parent1 -0x30000 +hwndcode
+	Gui,3:Add,TreeView,AltSubmit ggocode x0 y0
+	Gui,3:Show,x0 y0 w140,Code Explorer
+	hwnd(1,main),hwnd(2,explorer),hwnd(3,code)
+	menu()
+	if !ssn(xget("settings"),"//Fonts").xml
+	{
+		xadd("settings","Indent","",5)
+		defaultfonts()
+	}
+	autoopen()
+	indent=1
+	string([2040,25,13],[2040,26,15],[2040,27,11],[2040,28,10],[2040,29,9],[2040,30,12],[2040,31,14])
+	string([2244,2,0xFE000000],[2242,0,0],[2242,1,15],[2242,0,0],[2242,2,13],[2460,3],[2462,1],[2134,1],[2260,1],[2246,2,1],[2115,1])
+	string([2233,16],[2155,0,0],[2132,1],[2264,1000],[2122,1],[2037,65001],[2040,1,7],[2115,1])
+	sc(2122,2)
+	sc(2036,1)
+	Gui,1:Show,w800 h500 xcenter ycenter hide,Script Writer
+	Gui,1:Default
+	applypos(),ideaswindow()
+	set(),select(ssn(xget("settings"),"//lastopen/@segment").text)
+	ControlFocus,Scintilla1,ahk_id %main%
+	OnMessage(0x4E, "OnWmNotify"),setcolors()
+	OnMessage(0x231,"startmove")
+	OnMessage(0x232,"stopmove")
+	OnMessage(0x00A2,"aaa")
+	coderefresh(),hotkeys(1),setpos(),hotkeymenu(),vwin()
+	ControlFocus,Scintilla1,% hwnd("h1")
+	/*
+	;not working properly yet...
+	plugins()
+	return
+	plugin:
+	clean:=clean(A_ThisMenuItem)
+	%clean%()
+	*/
+	Hotkey([1,"+enter","enter"])
+	Hotkey([1,"{","brace"])
+	Hotkey([1,"}","closebrace"])
+	Hotkey([1,"(","paren"])
+	Hotkey([1,"^+up","movelineup"])
+	Hotkey([1,"^+down","movelinedown"])
+	return
+}
+startmove(a,b,c,d){
+	mousegetpos,,,,con
+	if !con
+	var({moving:1})
+}
+stopmove(){
+	var({moving:0})
+	getwinpos(x,y,w,h,hwnd(1))
+	GuiSize(w,h)
+}

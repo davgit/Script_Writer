@@ -1,0 +1,7 @@
+remove_spaces_from_selected(){
+	pos:=posinfo()
+	text:=textrange(pos.start,pos.end)
+	text:=regexreplace(text," ")
+	sc(2170,,text)
+	fix_indent()
+}

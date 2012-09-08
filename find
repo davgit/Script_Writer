@@ -1,0 +1,29 @@
+find(){
+	main:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text
+	find:=xg({positions:"//*[@main='" main "']/@find"}).text
+	window({num:12,title:"Find",gui:["Edit,w500 vfind," find,"TreeView,w500 h500","Checkbox,vsort,Sort by segment","Button,x+10 default gfind hidden,search"]
+	,GuiSize:{Button1:"y",SysTreeView321:"wh",Edit1:"w"}})
+	return
+	find:
+	info:=window(12),find:=info.find
+	main:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text
+	xx("positions","File",{main:main,find:find},,{main:main})
+	controlgetfocus,out,% hwnd("h12")
+	if out!=SysTreeView321
+	return check()
+	child:=tv_getchild(tv_getselection())
+	tv_gettext(position,child)
+	tv_gettext(file,tv_getnext(child))
+	if !xg({files:"//*[@file='" file "']"})
+	return TV_Modify(TV_GetSelection(),"Expand")
+	child:=tv_getchild(tv_getselection())
+	tv_gettext(position,child)
+	tv_gettext(file,tv_getnext(child))
+	select(file),sc(2160,position,position+strlen(find))
+	return
+	12GuiClose:
+	12GuiEscape:
+	savepos()
+	Gui,12:Destroy
+	return
+}

@@ -1,0 +1,35 @@
+new_segment(segment=""){
+	root:=xg({files:"//*[@sc='" sc(2357) "'].."}),mainfile:=ssn(root,"@main").text
+	SplitPath,mainfile,,dir
+	if !segment
+	inputbox,segment,Input a new name
+	if (segment="" || errorlevel)
+	exit
+	file:=dir "\" segment
+	StringLower,segment,segment
+	if fuck:=ssn(root,"*[@name='" segment "']")
+	return select(file)
+	gui,2:default
+	tv:=ssn(root,"mainfile/@TreeView").text
+	window:=ssn(root,"mainfile/@sc").text,text:=update({get:ssn(root,"@main").text}) "`r`n" chr(35) "include " segment
+	if (window=sc(2357))
+	sc(2181,,text)
+	if window && window != sc(2357)
+	sc(2377,window),update({file:mainfile,contents:text,changed:1}),ssn(root,"mainfile").removeattribute("sc")
+	else
+	update({file:mainfile,contents:text,changed:1})
+	fileappend,%a_space%,%file%
+	current:=tv_add(segment,tv)
+	filename:=dir "\" segment
+	xadddup(xget("files"),root,"file",{file:filename,TreeView:current,name:segment})
+	select(filename)
+	return
+}
+xadddup(main,node,name,att="",Text=""){
+	new:=main.createelement(name)
+	for a,b in att
+	new.setattribute(a,b)
+	if Text
+	new.text:=text
+	node.appendchild(new)
+}

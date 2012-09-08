@@ -1,0 +1,48 @@
+fix_indent(x=""){
+	fix:=xg({settings:"//Auto_Fix_Indentation"}).text
+	OnMessage(0x4E,"")
+	DllCall(s.fn,"Ptr",s.ptr,"UInt",2029,"Int","CRLF","Int",0,"Cdecl")
+	sc(2029,"CRLF")
+	ind:=xg({settings:"//Indent"}).text
+	ind:=ind?ind:1
+	out:=gettext()
+	indent=0
+	fix:=fix!=""?fix:0
+	sc(2078)
+	loop,parse,out,`r,`r`n
+	{
+		if position:=instr(a_loopfield,";")
+		text:=trim(substr(a_loopfield,1,position))
+		else
+		text:=trim(a_loopfield)
+		if (SubStr(text,0)="{"){
+			indent+=ind
+			if (fix || x){
+				sc(2126,A_Index-1,indent-ind)
+				sc(2126,A_Index,indent)
+			}
+			sc(2222,A_Index-1,0x2000|1024+indent-ind)
+		}
+		else if (text="}")
+		{
+			indent-=ind
+			if indent < 0
+			indent:=0
+			sc(2126,A_Index-1,indent)
+		}
+		else if (fix || x)
+		sc(2126,A_Index-1,indent)
+		sc(2222,A_Index,1024+indent)
+		list.=A_Index " " indent "`n"
+		if indent < 0
+		indent:=0  
+	}
+	update()
+	sc(2079),index:=A_Index
+	if indent>0
+	tooltip,Segment is open,0,0,10
+	else
+	ToolTip,,,,10
+	splashtextoff
+	OnMessage(0x4E, "OnWmNotify")
+}

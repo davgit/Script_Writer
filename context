@@ -1,0 +1,99 @@
+context(){
+	home:=sc(2128,sc(2166,sc(2008))),current:=sc(2008),con:=var("context")
+	while current>home,current--
+	{
+		style:=sc(2010,current)
+		if style in 13,3
+		continue
+		if style=1
+		break
+		if sc(2007,current)=41
+		current:=sc(2266,sc(2353,current)-1,1)-1
+		if style not in 6
+		continue
+		start:=sc(2266,current,1),end:=sc(2267,current,1),text:=textrange(start,end)
+		RegExMatch(con,"i)(" text "\b)",found)
+		break
+	}
+	var({cddl:0})
+	if !found1
+	return
+	newfun(start,end,found1)
+}
+newfun(totalstart,totalend,found1){
+	start:=totalend-1,count=1,val:=[],found1back:=found1
+	while,start<sc(2008),start++
+	if sc(2007,start)=44 || sc(2007,start)=40
+	break
+	while,start<sc(2008),start++
+	{
+		if sc(2007,start)=44
+		{
+			count++
+			f:=start
+			val[count]:=textrange(sc(2266,f,1),sc(2267,f,1))
+			while,!val[count],f--
+			if (f=lastmatch+1)
+			break
+			else
+			val[count]:=textrange(sc(2266,f,1),sc(2267,f,1))
+			lastmatch:=f
+		}
+		if sc(2007,start)=40
+		start:=sc(2353,start)
+	}
+	context:=xg({commands:"//*[text()='" found1 "']/@syntax"}).text,found1:=RegExReplace(found1,"[^a-zA-Z_]")
+	if xg({commands:"//" found1}){
+		list:=xg({commands:"//" found1 "/" found1}).text
+		for a,b in val{
+			Sort,list,UD%A_Space%
+			RegExMatch(list,"Ui)(\b" b ")",ff)
+			if ff1
+			list:=xg({commands:"//" ff1}),list:=list.text,maxcount:=a
+			asdf:=xg({commands:"//" found1 "/" found1 "/*[text()='" ff1 "']/@syntax"}).text,fstart.=RTrim("," ff1,",")
+			if asdf
+			ls:=asdf
+			if !ff1
+			{
+				list:=""
+				break
+			}
+		}
+	}
+	if list
+	{
+		var({cddl:1})
+		cpos:=sc(2008)
+		sc(2077,,"#abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVXWYZ0123456789")
+		start:=sc(2266,cpos,1),end:=sc(2267,cpos,1),len:=Abs(start-end)
+		sc(2077,,"#abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+		sort,list,D%A_Space%
+		sc(2100,len,list)
+		return
+	}
+	if ls
+	context:=cont:=fstart ", " ls
+	context:=cont:=found1back context
+	text:=textrange(totalstart,sc(2136,sc(2166,sc(2008))))
+	if InStr(text,"if")
+	for a,b in ["between","contains","in","is"]{
+		if RegExMatch(text,"Ui)\b" b "\b"){
+			context:=cont:=found1back xg({commands:"//*[@var='" b "']/@syntax"}).text
+			break
+		}
+	}
+	if InStr(context,"``n")
+	StringReplace,context,context,``n,`n,all
+	StringReplace,cont,cont,`(,`,
+	s:=InStr(cont,",",0,1,count),e:=InStr(cont,",",0,1,count+1)
+	e:=e?e:StrLen(cont)
+	sc(2205,0xAAAAAA)
+	if context
+	sc(2200,totalstart,context)
+	if !InStr(context,"`n")
+	sc(2204,s,e)
+	if s=0
+	sc(2207,0x0000FF)
+	else
+	sc(2207,0xFF0000)
+}

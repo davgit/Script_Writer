@@ -1,0 +1,18 @@
+Full_Backup(){
+	save()
+	SplashTextOn,300,100,Backing up...,Please wait, This may take some time if it has been a while since your last full backup.
+	main:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text
+	SplitPath,main,,dir
+	backup:=dir "\backup\Full Backup" A_Now
+	FileCreateDir,%backup%
+	loop,%dir%\*.*
+	{
+		if InStr(a_loopfilename,".exe") || InStr(A_LoopFileName,".dll")
+		continue
+		filecopy,%A_LoopFileFullPath%,%backup%\%A_LoopFileName%
+	}
+	loop,%dir%\backup\*.*,2
+	if !InStr(A_LoopFileFullPath,"Full Backup")
+	fileremovedir,%a_loopfilefullpath%,1
+	SplashTextOff
+}

@@ -1,0 +1,9 @@
+auto_update(){
+	save()
+	splitpath,a_scriptname,,,,filename
+	version:=version(1),ext:=if A_IsCompiled?".exe":".ahk"
+	filemove,%a_scriptname%,backup_%version%_%a_scriptname%,1
+	SplashTextOn,500,200,Please Wait,Downloading the new version.  This could take a minute
+	urldownloadtofile,http://www.autohotkey.net/~maestrith/beta/Script Writer%ext%,%a_scriptname%
+	reload
+}

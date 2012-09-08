@@ -1,0 +1,5 @@
+end_of_line(){
+	switch:=xg({settings:"//End_of_line"}).Text
+	switch:=switch?switch:0
+	sc(2356,switch)
+}

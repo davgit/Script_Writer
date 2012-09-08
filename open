@@ -1,0 +1,21 @@
+open(out=""){
+	if !out
+	FileSelectFile,out,,,,*.ahk
+	if ErrorLevel
+	return
+	instr(out,".ahk")?:out.=".ahk"
+	ifnotexist,%out%
+	return
+	if fileexist(out)
+	loop,%out%
+	out:=a_loopfilefullpath
+	if ssn(xget("files"),"//*[@file='" out "']")
+	select(out)
+	else
+	xadd("settings","lastopen/file","",out,1),autoopen(out),select(out)
+}
+open_folder(){
+	file:=ssn(xget("files"),"//*[@sc='" sc(2357) "']/@file").text
+	SplitPath,file,,dir
+	run,%dir%
+}

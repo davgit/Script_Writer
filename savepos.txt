@@ -1,0 +1,55 @@
+savepos(){
+ h:=hwnd()
+ for a,b in h
+ if !instr(a,"h"){
+  wingetpos,x,y,,,ahk_id %b%
+  VarSetCapacity(Rect,16,0)
+  DllCall("GetClientRect", "uint", b, "uint", &rect)
+  w:=numget(Rect,8,"Int")
+  h:=NumGet(Rect,12,"Int")
+  if a=1
+  xx:=x,yy:=y
+  if a>1 && a<3
+  x-=xx,y-=yy
+  WinGet,Style,Style,ahk_id %b%
+  xadd("settings","Gui/Position/Window" a,{x:x,y:y,w:w,h:h,style:style})
+ }
+ return
+ GuiEscape:
+ savepos()
+ return
+}
+applypos(winnum=""){
+ s:=xget("settings")
+ h:=hwnd()
+ for a,b in h
+ if !instr(a,"h"){
+  if winnum && winnum!=a
+  continue
+  num:=a,win:=b
+  if (num=2||num=3){
+   for a,b in {w:140,h:400}
+   if !value:=ssn(s,"//Window" num "/@" a)
+   %a%:=b
+   %a%:=value.text
+   gui,%num%:show,x0 y0 w%w% h%h%
+   WinSet,Style,%Style%,ahk_id %win%
+   controlmove,,,,,% w+1,ahk_id %win%
+   controlmove,,,,,% w,ahk_id %win%
+  }
+  ;if num>3
+  ;Gui,%num%:show,x%x% y%y% w%w% h%h%
+ }
+ if !winnum
+ {
+ for a,b in ["x","y","w","h"]
+ if !(s,"//Window1/@" b)
+ {
+  position=w600 h500 xcenter ycenter
+  break
+ }
+ else
+ position.=b ssn(s,"//Window1/@" b).text " "
+ gui,1:show,% position
+ }
+}

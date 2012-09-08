@@ -1,0 +1,36 @@
+keywords(x){
+	static
+	if (!isobject(keywords) || x=98){
+		keywords:=[],com:=[],list:=""
+		items:=xg({commands:"//Items"}).Text
+		context:=ssn(xget("commands"),"//Commands/Commands").Text
+		personal:=xg({settings:"//Variables"}).Text
+		for a,b in ["context","items","personal"]{
+			StringLower,h%b%,%b%
+			h%b%:=RegExReplace(h%b%,"[^0-9a-zA-Z _]")
+		}
+		var({context:context})
+		sort,hitems,UD%A_Space%
+		sort,hcontext,UD%A_Space%
+		sort,hpersonal,UD%A_Space%
+		keywords[1]:=hcontext
+		keywords[2]:=hitems
+		keywords[3]:=hpersonal
+		loop,3
+		keywords[a_index+3]:=xg({settings:"//Keyword_List_" A_Index}).text
+		alpha:=[]
+		total:=context " " items " " personal
+		Sort,total,UD%A_Space%
+		Loop,Parse,total,%A_Space%,%A_Space%
+		{
+			f:=SubStr(A_LoopField,1,1)
+			alpha[substr(a_loopfield,1,1)]:=1
+			%f%.=a_loopfield " "
+			keywords[substr(a_loopfield,1,1)].=a_loopfield " "
+		}
+		keywords[99]:=total
+	}
+	out:=keywords[x]
+	sort,out,D%a_space%
+	return out
+}
