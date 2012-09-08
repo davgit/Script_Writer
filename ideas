@@ -1,0 +1,24 @@
+ideas(){
+	WinGet,style,style,% hwnd("h17")
+	switch:=!(style&0x10000000)?"+":"-"
+	if switch=+
+	Gui,17:Show
+	else
+	Gui,17:Hide
+	savepos()
+}
+ideaswindow(){
+	window({num:17,title:"Ideas",gui:["Edit,videas w200 h200 gideas"]
+	,GuiSize:{Edit1:"wh"}})
+	return
+	17GuiClose:
+	17GuiEscape:
+	Gui,17:Hide
+	return
+	ideas:
+	var:=window(17)
+	filename:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text
+	ide:=xx("ideas","Script",{file:filename},,{file:filename})
+	ide.text:=RegExReplace(var.ideas,"`n","`r`n")
+	return
+}

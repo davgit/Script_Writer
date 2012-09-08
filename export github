@@ -1,15 +1,18 @@
 export_github(){
 	window({num:15,title:"Github copy",gui:["Text,,Select the files you wish to exclude from being sent to a separate directory`nfor creating a github repository","ListView,w800 h500 Checked multi,Files|Extension","Button,gsa,Select all","Button,gsn,Select none","Button,Default ggit,Copy"]
 	,GuiSize:{Button1:"y",SysListView321:"wh",Edit1:"w",Button2:"y",Button3:"y"}})
-	save(),xml:=xget("files")
+	save(),xml:=xget("files"),sel:=[]
 	mainfile:=ssn(xfind(xml,,"@sc",sc(2357)),"../@main").text
 	SplitPath,mainfile,,dir,,name
 	git:=% dir "\" clean(name) "\"
 	select:=xg({git:"//*[@file='" mainfile "']"}).Text
+	Loop,Parse,select,%A_Space%
+	sel[A_LoopField]:=A_LoopField
 	Loop,%dir%\*.*
 	{
 		SplitPath,A_LoopFileName,,,ext
-		check:=InStr(select,A_LoopFileName)?"Check":""
+		;check:=InStr(select,A_LoopFileName)?"Check":""
+		check:=sel[A_LoopFileName]?"Check":""
 		LV_Add(check,A_LoopFileName,ext)
 	}
 	Loop,2

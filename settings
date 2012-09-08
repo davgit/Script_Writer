@@ -1,0 +1,90 @@
+settings(){
+	static
+	hotkeys(0)
+	Gui,8:Destroy
+	Gui,8:+hwnder +Owner1
+	hwnd(8,er),colors(8)
+	Gui,Add,Text,Section x0 y0 w0
+	Gui,Add,Text,ys xs,Click on a value to change it, or press f2 while the value is highlighted.`nMake sure to press enter after setting your value`nRight click  an option or press F1 for a hotkey builder
+	Gui,Add,Tab,vstab h10 gsetpop Buttons,Hotkeys|General
+	Gui,Tab
+	Gui,Add,ListView,w500 h500 Section -Multi AltSubmit -ReadOnly,Hotkey|Action
+	all:=allattributes("settings","//Ftp")
+	Gui,Add,Text,,FTP Settings
+	for a,b in ["Server","Port","Username","Password"]{
+		pass:=A_Index=4?"password":""
+		Gui,Add,Text,x0 section,%b%:
+		Gui,Add,Edit,x+10 ys w300 v%b% %pass%,% all[b]
+	}
+	Gui,Show,,Settings
+	ControlFocus,SysListView321
+	setpop:
+	Gui,8:Submit,nohide
+	savesettings(stab)
+	Gui,8:Default
+	LV_Delete()
+	for a,b in constants(stab){
+		if (IsFunc(clean(a))=0&&stab="hotkeys")
+		continue
+		if isobject(b)
+		for index,value in b
+		lv_modifycol(index,"",value)
+		else
+		LV_Add("",xg({settings:"//" clean(a)}).text,a)
+	}
+	LV_ModifyCol(1,"AutoHDR"),LV_Modify(1,"select focus")
+	GuiControl,,Static1,%out%
+	Gui,Show,,Settings
+	ControlFocus,SysListView321,% hwnd("h8")
+	Hotkey([8,"F1","settingf1"])
+	return
+	settingf1:
+	Hotkey([8,"F1","settingf1","off"])
+	8GuiContextMenu:
+	window({num:99,titile:"Hotkey Builder",gui:["hotkey,vhotkey ghkb limit2"]
+	,GuiSize:{msctls_hotkey321:"wh"}})
+	Gui,99:Show
+	return
+	hkb:
+	var:=window(99)
+	Gui,8:Default
+	LV_GetText(action,LV_GetNext(),2)
+	LV_Modify(LV_GetNext(),"",var.hotkey,action)
+	return
+	99GuiEscape:
+	99GuiClose:
+	savepos()
+	Hotkey,IfWinActive,% hwnd("h8")
+	Hotkey,f1,settingf1,On
+	Gui,99:Destroy
+	ControlFocus,SysListView321,% hwnd("h8")
+	return
+	8GuiEscape:
+	8GuiClose:
+	Gui,8:Submit
+	xx("settings","Ftp",{username:username,password:password,port:port,server:server})
+	savesettings(stab),hotkeys(1),hotkeymenu(),stab:=""
+	Gui,8:Destroy
+	return
+	8GuiSize:
+	VarSetCapacity(Rect,16,0)
+	SendMessage,0x130a,0,&Rect,SysTabControl321,% hwnd("h8")
+	h:=NumGet(Rect,12,"Int")
+	ControlMove,SysTabControl321,,,%A_GuiWidth%,%h%,% hwnd("h8")
+	ControlGetPos,x,y,w,h,SysTabControl321,% hwnd("h8")
+	ControlMove,SysListView321,%x%,% y+h,,,% hwnd("h8")
+	return
+}
+savesettings(group){
+	Gui,8:Default
+	Loop,% LV_GetCount(){
+		LV_GetText(value,A_Index),LV_GetText(function,A_Index,2)
+		if value
+		xadd("settings",clean(group) "/" clean(function),value)
+	}
+	nodes:=xg({settings:"//Hotkeys"})
+	loop:=nodes.selectnodes("*")
+	while,val:=loop.item[A_Index-1]
+	if !val.Text
+	val.parentnode.removechild(val)
+}

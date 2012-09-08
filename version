@@ -1,0 +1,21 @@
+Version(x=""){
+	;auto_version
+	if x
+	return version
+	SplashTextOn,240,50,Downloading latest version information,Please wait
+	URLDownloadToFile,http://www.autohotkey.net/~maestrith/beta/Script Writer.text,version.ver
+	SplashTextOff
+	fileread,ver,version.ver
+	Gui,33:Destroy
+	Gui,33:Add,Edit,w500 h500,%ver%
+	Gui,33:Add,Button,gvdu,Download Latest Version
+	Gui,33:Show,,% "Current Version:" Version(1)
+	return
+	33GuiEscape:
+	33GuiClose:
+	Gui,33:Destroy
+	return
+	vdu:
+	auto_update()
+	return
+}

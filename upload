@@ -1,0 +1,72 @@
+upload(){
+	getpos()
+	all:=allattributes("settings","//Ftp")
+	if !(all.username&&all.password&&all.server)
+	return m("Your ftp server is not setup properly."),settings()
+	filename:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text
+	fv:=xg({version:"//*[@file='" filename "']"})
+	ver:=ssn(fv,"@version").text
+	ver:=ver?ver:1
+	in:=fv.text,dir:=ssn(fv,"@directory").text
+	compile:=xg({settings:"//Ftp/@compile"}).text
+	if compile
+	checked:=compile=1?"Checked":""
+	newline=`r`n
+	if !InStr(in,ver)
+	in:=ver newline newline in
+	StringReplace,in,in,`n,`r`n,all
+	window({num:13,title:"Upload",gui:["Text,,Version:","Edit,w400 vvernum,"ver,"Text,,Version information:","Edit,w500 h500 gupinfo vinfo","Text,,Upload Directory:","Edit,w400 vupdir," dir
+	,"Button,x+10 gupload Default,Upload","Checkbox,vcompile xm " checked " ,Compile and send exe"]
+	,GuiSize:{Edit1:"w",Edit2:"wh",Static3:"y",Edit3:"yw",Button1:"xy",Button2:"y"}})
+	filename:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text
+	pos:=xg({positions:"//*[@main='" filename "']/Version"}).xml
+	ControlSetText,Edit2,%in%,% hwnd("h13")
+	ControlFocus,Edit2,% hwnd("h13")
+	send,{Down}
+	return
+	13GuiClose:
+	13GuiEscape:
+	savepos()
+	gosub,upinfo
+	Gui,13:Destroy
+	return
+	upload:
+	var:=window(13)
+	save()
+	filedelete,temp.upload
+	FileAppend,% publish(2),temp.upload
+	xx("version","Script",{file:filename,version:ver(var["vernum"]),directory:var["updir"]},var["info"],{file:filename})
+	Gui,13:Destroy
+	SplitPath,A_AhkPath,,dir
+	Loop,%dir%\Ahk2Exe.exe,1,1
+	file:=A_LoopFileFullPath
+	filename:=filename:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text
+	splitpath,filename,,dir,,name
+	if var["compile"]{
+		SplashTextOn,200,100,Compiling,Please wait.
+		RunWait,%file% /in temp.upload /out "%dir%\%name%.exe"
+		SplashTextOff
+	}
+	filename:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text
+	xx("settings","Ftp",{compile:var["compile"]})
+	SplitPath,filename,,dir,,name
+	FileDelete,% dir "\" name ".text"
+	FileAppend,% var["info"],% dir "\" name ".text"
+	updir:=var["updir"]
+	save()
+	if var["compile"]
+	send(updir,{"temp.upload":filename},dir "\" name ".exe",dir "\" name ".text")
+	else
+	send(updir,filename,dir "\" name ".text")
+	return
+	upinfo:
+	var:=window(13)
+	filename:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text
+	I:=xx("version","Script",{file:filename,version:var["vernum"],directory:var["updir"]},,{file:filename})
+	i.text:=var["info"]
+	xx("settings","Ftp",{compile:var["compile"]})
+	return
+}
+send(dir,filename*){
+	ftp(dir,filename)
+}

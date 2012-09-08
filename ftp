@@ -1,0 +1,49 @@
+ftp(dir,files){
+	settimer,Progress,200
+	FTPCommandFile = %A_ScriptDir%\FTPCommands.txt
+	FTPLogFile = %A_ScriptDir%\FTPLog.txt
+	FileDelete %FTPCommandFile%  ; In case previous run was terminated prematurely.
+	all:=allattributes("settings","//Ftp")
+	for a,b in All
+	%a%:=b
+	for a,b in Files
+	{
+		if IsObject(b){
+			for a,b in b
+			splitpath,b,fn
+			b:=a
+		}
+		else
+		SplitPath,b,fn
+		filename.="put "chr(34) b chr(34)" /" chr(34) dir "/" fn chr(34) "`n"
+	}
+	info=hash`necho`nopen %server%`n%username%`n%password%`nbinary`nmkdir %dir%`ncd %dir%`n%filename%ls -l`nquit
+	fileappend,%info%,%ftpcommandfile%
+	RunWait,%comspec% /c ftp.exe -s:"%FTPCommandFile%" >"%FTPLogFile%",,Hide
+	FileDelete %FTPCommandFile%  ; Delete for security reasons.
+	SetTimer,Progress,Off
+	Progress,Off
+	return
+	Progress:
+	FileRead,pro,%A_ScriptDir%\FTPLog.txt
+	loop,Parse,pro,`n
+	{
+		if InStr(A_LoopField,"#")
+		hash:=A_LoopField
+		if InStr(A_LoopField,"put")
+		file:=A_LoopField
+		if InStr(file,"temp.upload")
+		file:=chr(34) xg({files:"//*[@sc='" sc(2357) "']../@main"}).text chr(34)
+	}
+	RegExMatch(file,"U)" chr(34) "(.*)" chr(34),file)
+	StringReplace,file,file,`",,All
+	FileGetSize,kb,%file%
+	RegExReplace(hash,"\#",0,count)
+	percent:=(count*2048*100)/kb
+	file:=file?file:"Logging in"
+	pro(percent,file)
+	return
+}
+pro(percent,file){
+	Progress,%percent%,%file%,Uploading,File,Tahoma
+}

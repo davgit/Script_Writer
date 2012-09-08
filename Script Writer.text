@@ -1,0 +1,57 @@
+0.400.18
+Fixed:
+-Auto numbering only advances the version number when you upload it to an FTP server.
+0.400.17
+Changed:
+-Version information is now displayed in a window with a button for updating the program.
+0.400.16
+Fixed:
+-When closing projects it will update the Scripts menu to reflect the open files.
+0.400.15
+Fixed:
+-Debugging files were not running from the right directory
+0.400.14
+Fixed:
+-Ideas window was not adding new lines.
+-Windows forgetting how to resize properly
+0.400.13
+Fixed:
+-When attempting to add a new segment to a project that already had that segment name it would add it twice.
+Added:
+-Ideas window
+-Main window now has Script Writer: %name of current project% - %name of current segment%
+0.400.12
+Added:
+-Replace text
+-Find replacement text in all segments of the current project
+0.400.11
+Changed:
+-Uploading files to an FTP server gives more information
+0.400.10
+Added:
+-FTP login information check
+0.400.9
+Changed:
+-Window resizing is a bit more stable
+-Version numbering is actually useful
+0.400.8
+Added:
+-Auto update for the beta.  I should just change this to the release....
+0.400.7
+Added:
+-Version is working with extreem simplicity
+0.400.6
+Fixed:
+-Code Explorer will pick up hotkeys with modifiers on them (!+F1..)
+0.400.5
+Compile/upload working now.
+0.400.4
+Auto version working.  just add ;auto_version to your script and it will put the version number in for you
+0.400.3
+Latest script
+0.400.2
+Uploading now works
+0.400.1
+Working out the kinks
+0.400.0
+First upload

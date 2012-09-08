@@ -1,0 +1,10 @@
+set(){
+     indent:=xg({settings:"//Indent"}).text
+     indent:=indent?indent:1
+     sc(2036,indent)
+     sc(2124,1)
+     sc(4006,,"asm")
+     loop,7
+     sc(4005,a_index-1,keywords(a_index))
+     sc(2077,,"#abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVXWYZ")
+}
