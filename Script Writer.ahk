@@ -22,7 +22,7 @@ if !fileexist("commands.xml"){
 	FileDelete,commands.xml
 	FileAppend,%com%,commands.xml
 }
-if xg({commands:"//Version/Date"}).text!=20120724210213
+if xg({commands:"//Version/Date"}).text!=20120919045107
 {
 	FileDelete,commands.xml
 	Reload

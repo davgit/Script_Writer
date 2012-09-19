@@ -8,10 +8,8 @@ OnWmNotify(wParam,lParam,msg,hwnd){
 	if code=2001
 	if ssn(xget("files"),"//*[@sc='" sc(2357) "']/@file").xml="" && control!=colors
 	return ff()
-	if (code=2008){
-		chr:=sc(2007,cpos-1)
-		SB_SetText("Last Inserted Character Code=" chr,4)
-	}
+	if (code=2008)
+	SB_SetText("Last Inserted Character Code=" sc(2007,cpos-1),4)
 	if (code=2001){
 		char:=sc(2007,cpos-1)
 		word:=textrange(sc(2266,cpos,1),sc(2267,cpos,1))
@@ -65,27 +63,37 @@ OnWmNotify(wParam,lParam,msg,hwnd){
 		x:=abs(xx-x),y:=abs(yy-y)
 		sc(2231,sc(2166,sc(2022,x,y)))
 	}
-	if var("cddl") && code=2022
+	if code=2022
 	{
-		sc(2003,cpos,",")
+		VarSetCapacity(text,20),sc(2610,,&text),text:=strget(&text,"","cp0")
+		StringReplace,text,text,#,,All
+		find:=sn(xget("commands"),"//Context/*/*/list/@list|//Context/*/syntax[contains(text(),'" text "')]")
+		if ssn(xget("commands"),"//Context/" text)
 		settimer,nextcontext,1
+		while,f:=find.item[A_Index-1]
+		if InStr(f.text,text){
+			settimer,nextcontext,1
+			break
+		}
+		else
+		con()
 		return
 	}
-	if code in 2001 ;,2022
-	SetTimer,con,1
+	if (code=2001)
+	con()
 }
 con(){
-	con:
-	if sc(2102)=0 && xg({settings:"//Context_Sensitive_Help"}).text
-	context()
-	SetTimer,con,Off
-	return
+	sleep,0
+	context()	
 }
 ff(){
 	m("Please either create a new file, or open an existing one.")
 	return
 	nextcontext:
-	sc(2160,sc(2008)+1,sc(2008)+1)
+	if !(sc(2102)=0 && xg({settings:"//Context_Sensitive_Help"}).text)
+	return
+	sc(2003,sc(2008),","),sc(2160,sc(2008)+1,sc(2008)+1)
+	sleep,0
 	SetTimer,nextcontext,off
 	context()
 	return

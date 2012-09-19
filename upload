@@ -45,6 +45,8 @@ upload(){
 	if var["compile"]{
 		SplashTextOn,200,100,Compiling,Please wait.
 		RunWait,%file% /in temp.upload /out "%dir%\%name%.exe"
+		IfExist,upx.exe
+		RunWait,upx.exe "%dir%\%name%.exe"
 		SplashTextOff
 	}
 	filename:=xg({files:"//*[@sc='" sc(2357) "']../@main"}).text

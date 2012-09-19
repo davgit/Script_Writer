@@ -1,3 +1,7 @@
+0.400.19
+Changed:
+-Context Sensitive Help for Gui,Loop,and #Singleinstance has automatic dropdowns for input
+! Anyone who is upgrading it will require a new download of the commands.xml
 0.400.18
 Fixed:
 -Auto numbering only advances the version number when you upload it to an FTP server.

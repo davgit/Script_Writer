@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Commands>
 	<Version>
-		<Date>20120724210213</Date>
+		<Date>20120919045107</Date>
 	</Version>
 	<Commands>
 		<commands>#AllowSameLineComments</commands>
@@ -1000,37 +1000,30 @@
 		<item>ProgramFiles</item>
 		<item>true</item>
 		<item>false</item>
-		<item>false</item>
 	</Items>
-	<Loop>
+	<Context>
 		<Loop>
-			<commands syntax=" [ Key, IncludeSubkeys?, Recurse?]">HKEY_CURRENT_CONFIG</commands>
-			<commands syntax=" [ Key, IncludeSubkeys?, Recurse?]">HKEY_CLASSES_ROOT</commands>
-			<commands syntax=" [ Key, IncludeSubkeys?, Recurse?]">HKEY_CURRENT_USER</commands>
-			<commands syntax=" [ Key, IncludeSubkeys?, Recurse?]">HKEY_USERS</commands>
-			<commands syntax=" [ Key, IncludeSubkeys?, Recurse?]">HKEY_LOCAL_MACHINE</commands>
-			<commands syntax=" [ Delimiters, OmitChars]">Parse</commands>
-			<commands syntax=" [ OutputFile]">Read</commands>
+			<commands list="HKEY_CURRENT_CONFIG HKEY_CLASSES_ROOT HKEY_CURRENT_USER HKEY_USERS HKEY_LOCAL_MACHINE Parse Read"></commands>
+			<syntax syntax=" [ Key, IncludeSubkeys?, Recurse?]">HKEY_CURRENT_CONFIG HKEY_CLASSES_ROOT HKEY_CURRENT_USER HKEY_USERS HKEY_LOCAL_MACHINE</syntax>
+			<syntax syntax=" [ Variable, Delimiters, OmitChars]">Parse</syntax>
+			<syntax syntax=" [ OutputFile]">Read</syntax>
 		</Loop>
-	</Loop>
-	<Gui>
 		<Gui>
-			<command syntax="[ Options, Title]">New</command>
-			<command syntax="[ Options, Text]">Add</command>
-			<command syntax="[ Options, Title]">Show</command>
-			<command syntax="[ NoHide]">Submit</command>
-			<command syntax="[]">Hide</command>
-			<command syntax="[]">Destroy</command>
-			<command syntax="[ Options, FontName]">Font</command>
-			<command syntax="[ WindowColor, ControlColor]">Color</command>
-			<command syntax="[ X, Y]">Margin</command>
-			<command syntax="[ Menuname]">Menu</command>
-			<command syntax="[]">Minimize</command>
-			<command syntax="[]">Maximize</command>
-			<command syntax="[]">Restore</command>
-			<command syntax="[ Off]">Flash</command>
-			<command syntax="[]">Default</command>
+			<commands list="Add New Show Submit Hide Destroy Minimize Maximize Restore Default Font Color Margin Menu Flash"></commands>
+			<syntax syntax="[ Options, Text]">Text Edit UpDown Picture Button Checkbox Radio DropDownList ComboBox ListBox ListView TreeView Hotkey DateTime MonthCal Slider Progress GroupBox Tab StatusBar ActiveX</syntax>
+			<list list="Text Edit UpDown Picture Button Checkbox Radio DropDownList ComboBox ListBox ListView TreeView Hotkey DateTime MonthCal Slider Progress GroupBox Tab StatusBar ActiveX">Add</list>
+			<list list="Nohide">Submit</list>
+			<syntax syntax="[ Options, Title]">New Show</syntax>
+			<syntax syntax="[ Options, Text]">Add</syntax>
+			<syntax syntax="">Submit</syntax>
+			<syntax syntax="[ Options, FontName]">Font</syntax>
+			<syntax syntax="[ WindowColor, ControlColor]">Color</syntax>
+			<syntax syntax="[ X, Y]">Margin</syntax>
+			<syntax syntax="[ Menuname]">Menu</syntax>
+			<syntax syntax="[ Off]">Flash</syntax>
 		</Gui>
-	<Add>Text Edit UpDown Picture Button Checkbox Radio DropDownList ComboBox ListBox ListView TreeView Hotkey DateTime MonthCal Slider Progress GroupBox Tab StatusBar ActiveX</Add>
-	</Gui>
+		<SingleInstance>
+			<commands list="Force Ignore Off"></commands>			
+		</SingleInstance>
+	</Context>
 </Commands>
