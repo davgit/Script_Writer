@@ -68,4 +68,16 @@ rundebug(){
 	else
 	sc(2160,sc(2128,line1-1),sc(2136,line1-1))
 	sc(2200,sc(2008),debug)
+	;if InStr(debug,"call to"){
+	;SetTimer,fixit,1
+	;}
 }
+;fixit(){
+;fixit:
+;settimer,fixit,off
+;send,{left}
+;send,^v
+;update()
+;run()
+;return
+;}

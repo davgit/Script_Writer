@@ -1,3 +1,11 @@
+0.400.21
+Added:
+-Drag and drop files to the current project
+-File/Show file: Opens an explorer window with the current file highlighted.
+0.400.20
+Added:
+-Font:
+--Default Background Color option in the font editor window
 0.400.19
 Changed:
 -Context Sensitive Help for Gui,Loop,and #Singleinstance has automatic dropdowns for input

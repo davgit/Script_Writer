@@ -125,3 +125,6 @@ t(f*){
 #include import
 #include export github
 #include move selected line up
+#include drag drop
+#include j:\script writer\temp.upload
+#include show file

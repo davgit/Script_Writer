@@ -1,0 +1,23 @@
+drag_drop(){
+	GuiDropFiles:
+	if A_EventInfo>1
+	return m("One file at a time please")
+	FileRead,file,%A_GuiEvent%
+	SplitPath,A_GuiEvent,name
+	main:=ssn(xget("files"),"//*[@sc='" sc(2357) "']/..")
+	SplitPath,main,,dir
+	FileCopy,%A_GuiEvent%,%dir%\%name%
+	if sn(main,"//*[@main='" A_GuiEvent "']|//*[@file='" A_GuiEvent "']").length
+	return m("File already exists in the current project.  Rename the file and try again.")
+	new_segment(name)
+	var({wd:file})
+	settimer,dddelay,1
+	return
+}
+wd(){
+	dddelay:
+	text:=var("wd")
+	sc(2181,,text)
+	SetTimer,dddelay,Off
+	return
+}

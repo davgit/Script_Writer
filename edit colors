@@ -23,6 +23,7 @@ font(){
 	loop,34
 	DllCall(fn1,"Ptr",ptr1,"UInt",2409,"Int",a_index-1,"int",1,"Cdecl")
 	Menu,Default,Add,Restore fonts to default,fontlabel
+	Menu,Default,Add,Default Background Color,dbc
 	gui,9:menu,Default
 	return
 	87GuiSize:
@@ -54,5 +55,11 @@ font(){
 	MsgBox,4,Reset fonts to default,Are you sure?
 	IfMsgBox,Yes
 	fonts:=xg({settings:"//Fonts"}),fonts.parentnode.removechild(fonts),defaultfonts(),setcolors()
+	return
+	dbc:
+	color:=xg({settings:"//Style32/@Background"}).text
+	color:=dlg_color(color)
+	xadd("settings","Gui/Fonts/Style32",{Background:color})
+	setcolors()
 	return
 }

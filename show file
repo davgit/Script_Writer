@@ -1,0 +1,6 @@
+show_file(){
+	file:=ssn(xget("files"),"//*[@sc='" sc(2357) "']/@file")
+	f:=file.text
+	file:="/select," chr(34) file.text chr(34)
+	run explorer.exe %file%
+}
